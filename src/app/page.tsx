@@ -95,7 +95,7 @@ export default function Page() {
                   { name: "ENGINEERING", color: "brown" },
                   { name: "PRODUCT", color: "grey" },
                 ]}
-                description="AI-powered chat platform for sports fans that provides real-time insights, stats, and conversation about games and players."
+                description="AI-powered chat platform for users to get guidance on how to connect better in a digital world."
                 details="$596 MRR SaaS"
                 link="https://banterbot.chat"
               />
