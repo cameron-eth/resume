@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "You should try to hire Cameron",
-  description: "He might be willing to accept your offer.",
+  title: "Hi, I'm Cameron",
+  description: "Welcome",
 };
 
 export default function RootLayout({
