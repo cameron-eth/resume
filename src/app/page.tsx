@@ -43,14 +43,13 @@ export default function Page() {
           <div className="max-w-3xl space-y-12">
             <div className="border-b border-[#e6e1d6] pb-2">
               <h1 className="text-4xl uppercase tracking-widest font-light">Cameron Norfleet</h1>
-              <p className="uppercase tracking-widest text-sm mt-2">Data, Engineering, GTM</p>
+              <p className="uppercase tracking-widest text-sm mt-2">Data & Engineering</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="md:col-span-2 md:border-r md:pr-8 border-[#e6e1d6]">
                 <p className="text-sm leading-relaxed">
-                  Currently helping define the future of sports media at Barstool Sports, where I turn data into
-                  actionable strategies that fuel audience & revenue growth.{" "}
+                  Currently building AI agents at Amigo. Driving the the future of automation in healthcare.{" "}
                   <span className="font-bold">After work I also build my own ideas.</span>
                 </p>
               </div>
@@ -58,7 +57,7 @@ export default function Page() {
               <div className="md:pl-4 space-y-6">
                 <div>
                   <p className="text-xs uppercase tracking-widest mb-2">Location</p>
-                  <p className="text-sm">San Francisco, CA</p>
+                  <p className="text-sm">Brooklyn, New York</p>
                 </div>
 
                 <div>
@@ -85,7 +84,7 @@ export default function Page() {
                   { name: "PRODUCT", color: "grey" },
                 ]}
                 description="A sports betting platform that syncs with sportsbooks to track bets, provide analytics, and offer insights for bettors."
-                details="$1.2k MRR SaaS"
+                details="$2.1k MRR SaaS"
                 link="https://betsync.us"
               />
 
@@ -112,25 +111,15 @@ export default function Page() {
               />
 
               <ProjectCard
-                title="NFL DRAFT QB SUCCESS MODEL"
+                title="DRAFT THEORY"
                 categories={[
                   { name: "DATA", color: "brown" },
                   { name: "ANALYSIS", color: "grey" },
+                  { name: "MODELING", color: "maroon" },
                 ]}
-                description="Statistical model that predicts NFL quarterback success based on college performance, combine metrics, and historical draft data."
-                details="Kaggle Project"
-                link="https://www.kaggle.com/code/cameroneth/nfl-qb-draft-data-analysis"
-              />
-
-              <ProjectCard
-                title="NFL DRAFT TRENDS EDA"
-                categories={[
-                  { name: "DATA", color: "brown" },
-                  { name: "ANALYSIS", color: "grey" },
-                ]}
-                description="Exploratory data analysis of NFL draft patterns over time, examining positional value, team strategies, and success rates."
-                details="Kaggle Project"
-                link="https://www.kaggle.com/code/cameronnorfleet/data-science-combine-analysis-eda"
+                description="Comprehensive EDA modeling the predictability of the NFL draft with deep analysis surrounding +EV in the NFL's talent market. Advanced analytics using 42 pre-draft features across 2,397 players (2015-2024)."
+                details="R² = 0.414 • 41.4% Variance Explained"
+                link="https://v0-draft-theory.vercel.app/"
               />
             </div>
           </div>
