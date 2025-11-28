@@ -42,11 +42,12 @@ export default function Page() {
 
       <main className={cn(containerClass, "pt-32 pb-16")}>
         {/* About Section */}
-        <section id="about" className="py-16 scroll-mt-24">
+        <section id="about" className="pt-8 pb-16 scroll-mt-24">
           <div className="space-y-8">
             <h1 className="text-3xl md:text-4xl font-light text-zinc-50 tracking-tight">
               <span className="font-semibold">Cameron Norfleet</span>
             </h1>
+            <div className="border-b border-stone-800 pb-2"></div>
             
             <div className="space-y-6 text-sm text-zinc-400">
               <p className="leading-relaxed">
