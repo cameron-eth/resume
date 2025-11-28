@@ -2,11 +2,12 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ExternalLink } from "lucide-react"
+import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { FlickeringGrid } from "@/components/FlickeringGrid"
 
 export default function Page() {
   const [activeSection, setActiveSection] = useState("about")
@@ -14,7 +15,12 @@ export default function Page() {
   const containerClass = "max-w-6xl mx-auto px-6 md:px-12"
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-50 font-sans">
+    <div className="min-h-screen bg-zinc-950 text-zinc-50 font-sans relative">
+      {/* Flickering Grid Background */}
+      <div className="fixed inset-0 z-0 opacity-20">
+        <FlickeringGrid squareSize={3} gridGap={4} flickerChance={0.2} maxOpacity={0.15} />
+      </div>
+      
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-sm border-b border-stone-800">
         <div className={cn(containerClass, "py-6 flex justify-between items-center")}>
@@ -33,50 +39,66 @@ export default function Page() {
             >
               Projects
             </NavLink>
-            <NavLink href="#contact" active={activeSection === "contact"} onClick={() => setActiveSection("contact")}>
-              Contact
+            <NavLink href="#spotify" active={activeSection === "spotify"} onClick={() => setActiveSection("spotify")}>
+              Spotify
             </NavLink>
           </div>
         </div>
       </nav>
 
-      <main className={cn(containerClass, "pt-32 pb-16")}>
+      <main className={cn(containerClass, "pt-32 pb-16 relative z-10")}>
         {/* About Section */}
-        <section id="about" className="pt-8 pb-16 scroll-mt-24">
+        <section id="about" className="pt-8 pb-8 scroll-mt-24">
           <div className="space-y-8">
-            <h1 className="text-3xl md:text-4xl font-light text-zinc-50 tracking-tight">
-              <span className="font-semibold">Cameron Norfleet</span>
-            </h1>
-            <div className="border-b border-stone-800 pb-2"></div>
+            <div>
+              <div className="flex items-start justify-between gap-8">
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-2">
+                    <h1 className="text-3xl md:text-4xl font-light text-zinc-50 tracking-tight">
+                      <span className="font-semibold">Cameron Norfleet</span>
+                    </h1>
+                    <Link
+                      href="https://x.com/camfleety"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-zinc-500 hover:text-zinc-300 transition-colors"
+                    >
+                      @camfleety
+                    </Link>
+                  </div>
+                  <div className="flex items-center gap-4 text-sm text-zinc-400">
+                    <span>Age: 26</span>
+                    <span className="text-zinc-600">•</span>
+                    <span>Height: 6-01</span>
+                    <span className="text-zinc-600">•</span>
+                    <span>Weight: 190 lbs</span>
+                  </div>
+                </div>
+              </div>
+              <div className="border-b border-stone-800 pb-2 mt-4"></div>
+            </div>
             
             <div className="space-y-6 text-sm text-zinc-400">
-              <p className="leading-relaxed">
-                Building AI agents at Amigo, driving the future of automation in healthcare.{" "}
-                <span className="text-zinc-300">After hours, I build my own ideas.</span>
-              </p>
               
               <div className="flex flex-col md:flex-row md:gap-12 gap-4">
-                <div>
+                <div className="flex flex-col">
                   <span className="text-zinc-500">Occupation</span>
-                  <span className="mx-2">·</span>
                   <span className="text-zinc-300">Agent Engineer, Amigo</span>
                 </div>
                 
                 <div className="hidden md:block w-px h-4 bg-stone-800 self-center"></div>
                 <div className="md:hidden border-b border-stone-800"></div>
                 
-                <div>
+                <div className="flex flex-col">
                   <span className="text-zinc-500">Location</span>
-                  <span className="mx-2">·</span>
                   <span className="text-zinc-300">Brooklyn, New York</span>
                 </div>
                 
                 <div className="hidden md:block w-px h-4 bg-stone-800 self-center"></div>
                 <div className="md:hidden border-b border-stone-800"></div>
                 
-                <div>
+                <div className="flex flex-col">
                   <span className="text-zinc-500">Education</span>
-                  <span className="mx-2">·</span>
                   <span className="text-zinc-300">Information System & Data Analytics, San Jose State University</span>
                 </div>
               </div>
@@ -86,99 +108,48 @@ export default function Page() {
 
         {/* Projects Section */}
         <section id="projects" className="py-16 scroll-mt-24">
-          <div className="space-y-12">
-            <div className="border-stone-800 pb-2">
-              <h2 className="uppercase font-bold tracking-widest text-sm text-zinc-50">Projects</h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-              <ProjectCard
-                title="BETSYNC"
-                categories={[
-                  { name: "ENGINEERING", color: "zinc" },
-                  { name: "PRODUCT", color: "stone" },
-                ]}
-                description="A sports betting platform that syncs with sportsbooks to track bets, provide analytics, and offer insights for bettors."
-                details="$2.1k MRR SaaS"
-                link="https://betsync.us"
-                image="/betsync-preview.png"
-              />
-
-              <ProjectCard
-                title="FIRST BALLOT FF"
-                categories={[
-                  { name: "ENGINEERING", color: "zinc" },
-                  { name: "PRODUCT", color: "stone" },
-                ]}
-                description="Fantasy football platform providing advanced analytics, insights, and tools for competitive fantasy football players."
-                details=""
-                link="https://www.firstballotff.com"
-                image="/firstballot-preview.png"
-              />
-
-              <ProjectCard
-                title="HIERLOOM AI"
-                categories={[
-                  { name: "PRODUCT", color: "stone" },
-                  { name: "DESIGN", color: "zinc" },
-                ]}
-                description="AI-driven platform for preserving and sharing family stories and memories through interactive digital experiences."
-                details="Not Launched"
-                link="https://kzmnd86rwvzt1kwkjfas.lite.vusercontent.net/"
-                image="/hierloom-preview.png"
-              />
-
-              <ProjectCard
-                title="DRAFT THEORY"
-                categories={[
-                  { name: "DATA", color: "zinc" },
-                  { name: "ANALYSIS", color: "stone" },
-                  { name: "MODELING", color: "zinc" },
-                ]}
-                description="Comprehensive EDA modeling the predictability of the NFL draft with deep analysis surrounding +EV in the NFL's talent market. Advanced analytics using 42 pre-draft features across 2,397 players (2015-2024)."
-                details="R² = 0.414 • 41.4% Variance Explained"
-                link="https://v0-draft-theory.vercel.app/"
-                image="/draft-theory-preview.png"
-              />
-            </div>
-          </div>
+          <ProjectsCarousel />
         </section>
 
-        {/* Contact Section */}
-        <section id="contact" className="py-16 scroll-mt-24">
-          <div className="max-w-3xl space-y-12">
-            <div className="border-b border-stone-800 pb-2">
-              <h2 className="uppercase tracking-widest font-bold text-sm text-zinc-50">Contact</h2>
-            </div>
+        {/* Spotify Section */}
+        <section id="spotify" className="py-16 scroll-mt-24">
+          <SpotifySection />
+        </section>
+      </main>
 
-            <div className="grid grid-cols-1 gap-6">
-              <div className="flex items-center justify-between border-b border-stone-800 pb-4">
+      <footer className="border-t border-stone-800 py-12">
+        <div className={containerClass}>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+            <p className="text-xs uppercase tracking-widest text-zinc-500">© {new Date().getFullYear()} Cameron Norfleet</p>
+            
+            <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+              <div className="flex items-center gap-2">
                 <p className="text-xs uppercase tracking-widest text-zinc-500">Email</p>
-                <Link href="mailto:camfleety@gmail.com" className="text-sm text-zinc-300 hover:text-zinc-50 hover:underline transition-colors">
+                <Link href="mailto:camfleety@gmail.com" className="text-xs text-zinc-300 hover:text-zinc-50 hover:underline transition-colors">
                   camfleety@gmail.com
                 </Link>
               </div>
 
-              <div className="flex items-center justify-between border-b border-stone-800 pb-4">
+              <div className="flex items-center gap-2">
                 <p className="text-xs uppercase tracking-widest text-zinc-500">LinkedIn</p>
                 <Link
                   href="https://www.linkedin.com/in/cameron-norfleet-b42885162/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-zinc-300 hover:text-zinc-50 hover:underline flex items-center gap-2 transition-colors"
+                  className="text-xs text-zinc-300 hover:text-zinc-50 hover:underline flex items-center gap-1 transition-colors"
                 >
                   View Profile
                   <ExternalLink className="w-3 h-3" />
                 </Link>
               </div>
 
-              <div className="flex items-center justify-between border-b border-stone-800 pb-4">
+              <div className="flex items-center gap-2">
                 <p className="text-xs uppercase tracking-widest text-zinc-500">Twitter</p>
                 <Link
                   href="https://x.com/camfleety"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-zinc-300 hover:text-zinc-50 hover:underline flex items-center gap-2 transition-colors"
+                  className="text-xs text-zinc-300 hover:text-zinc-50 hover:underline flex items-center gap-1 transition-colors"
                 >
                   @camfleety
                   <ExternalLink className="w-3 h-3" />
@@ -186,12 +157,6 @@ export default function Page() {
               </div>
             </div>
           </div>
-        </section>
-      </main>
-
-      <footer className="border-t border-stone-800 py-8">
-        <div className={containerClass}>
-          <p className="text-xs uppercase tracking-widest text-zinc-500">© {new Date().getFullYear()} Cameron Norfleet</p>
         </div>
       </footer>
     </div>
@@ -290,6 +255,316 @@ function ProjectCard({
         <p className="text-xs mt-4 leading-relaxed text-zinc-400">{description}</p>
         <p className="text-xs mt-4 font-medium text-zinc-300">{details}</p>
       </div>
+    </div>
+  )
+}
+
+// Component for Projects Carousel
+function ProjectsCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const projects = [
+    {
+      title: "BETSYNC",
+      categories: [
+        { name: "ENGINEERING", color: "zinc" },
+        { name: "PRODUCT", color: "stone" },
+      ],
+      description: "A sports betting platform that syncs with sportsbooks to track bets, provide analytics, and offer insights for bettors.",
+      details: "$2.1k MRR SaaS",
+      link: "https://betsync.us",
+      image: "/betsync-preview.png",
+    },
+    {
+      title: "HIERLOOM AI",
+      categories: [
+        { name: "PRODUCT", color: "stone" },
+        { name: "DESIGN", color: "zinc" },
+      ],
+      description: "AI-driven platform for preserving and sharing family stories and memories through interactive digital experiences.",
+      details: "Not Launched",
+      link: "https://kzmnd86rwvzt1kwkjfas.lite.vusercontent.net/",
+      image: "/hierloom-preview.png",
+    },
+    {
+      title: "FIRST BALLOT FF",
+      categories: [
+        { name: "ENGINEERING", color: "zinc" },
+        { name: "PRODUCT", color: "stone" },
+      ],
+      description: "Fantasy football platform providing advanced analytics, insights, and tools for competitive fantasy football players.",
+      details: "",
+      link: "https://www.firstballotff.com",
+      image: "/firstballot-preview.png",
+    },
+    {
+      title: "DRAFT THEORY",
+      categories: [
+        { name: "DATA", color: "zinc" },
+        { name: "ANALYSIS", color: "stone" },
+        { name: "MODELING", color: "zinc" },
+      ],
+      description: "Comprehensive EDA modeling the predictability of the NFL draft with deep analysis surrounding +EV in the NFL's talent market. Advanced analytics using 42 pre-draft features across 2,397 players (2015-2024).",
+      details: "R² = 0.414 • 41.4% Variance Explained",
+      link: "https://v0-draft-theory.vercel.app/",
+      image: "/draft-theory-preview.png",
+    },
+  ]
+
+  const projectsPerPage = 2
+  const totalPages = Math.ceil(projects.length / projectsPerPage)
+  const currentProjects = projects.slice(currentIndex, currentIndex + projectsPerPage)
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + projectsPerPage >= projects.length ? 0 : prev + projectsPerPage))
+  }
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - projectsPerPage < 0 ? (totalPages - 1) * projectsPerPage : prev - projectsPerPage))
+  }
+
+  return (
+    <div className="space-y-12">
+      <div className="border-stone-800 pb-2">
+        <h2 className="uppercase font-bold tracking-widest text-sm text-zinc-50">Projects</h2>
+      </div>
+
+      <div className="relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+          {currentProjects.map((project, index) => (
+            <ProjectCard
+              key={`${project.title}-${currentIndex + index}`}
+              title={project.title}
+              categories={project.categories}
+              description={project.description}
+              details={project.details}
+              link={project.link}
+              image={project.image}
+            />
+          ))}
+        </div>
+
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between mt-8">
+            <button
+              onClick={prevSlide}
+              className="flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-500 hover:text-zinc-300 transition-colors"
+              aria-label="Previous projects"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              Previous
+            </button>
+
+            <div className="flex gap-2">
+              {Array.from({ length: totalPages }).map((_, index) => {
+                const pageStartIndex = index * projectsPerPage
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentIndex(pageStartIndex)}
+                    className={cn(
+                      "w-2 h-2 rounded-full transition-colors",
+                      currentIndex === pageStartIndex ? "bg-zinc-50" : "bg-stone-800 hover:bg-stone-700"
+                    )}
+                    aria-label={`Go to page ${index + 1}`}
+                  />
+                )
+              })}
+            </div>
+
+            <button
+              onClick={nextSlide}
+              className="flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-500 hover:text-zinc-300 transition-colors"
+              aria-label="Next projects"
+            >
+              Next
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// Manual tracks list - Update Spotify URLs as needed
+const MANUAL_TRACKS = [
+  {
+    name: "Gravity",
+    artists: [{ name: "John Mayer" }],
+    external_urls: { spotify: "https://open.spotify.com/track/4sh2j5lDom6m0nGqgVprwO" },
+    album: { images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }] },
+  },
+  {
+    name: "Bowie Box",
+    artists: [{ name: "Dominic Fike" }],
+    external_urls: { spotify: "https://open.spotify.com/search/Bowie%20Box%20Dominic%20Fike" },
+    album: { images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }] },
+  },
+  {
+    name: "Something to Rap About",
+    artists: [{ name: "Freddie Gibbs" }, { name: "Tyler, The Creator" }],
+    external_urls: { spotify: "https://open.spotify.com/track/5uD0Z2of3Im42RG1KykJvY" },
+    album: { images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }] },
+  },
+  {
+    name: "How Does It Feel",
+    artists: [{ name: "D'Angelo" }],
+    external_urls: { spotify: "https://open.spotify.com/track/0ixyLzNaPr7G2Fu5ETgssB" },
+    album: { images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }] },
+  },
+  {
+    name: "News or Something",
+    artists: [{ name: "Isaiah Rashad" }],
+    external_urls: { spotify: "https://open.spotify.com/search/News%20or%20Something%20Isaiah%20Rashad" },
+    album: { images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }] },
+  },
+  {
+    name: "Purple Rain",
+    artists: [{ name: "Prince" }],
+    external_urls: { spotify: "https://open.spotify.com/track/54X78diSLoUDI3joC2bjMz" },
+    album: { images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }] },
+  },
+  {
+    name: "Voyage to Atlantis",
+    artists: [{ name: "The Isley Brothers" }],
+    external_urls: { spotify: "https://open.spotify.com/track/5BW1UgmBKaq9kf5t7gX5wp" },
+    album: { images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }] },
+  },
+]
+
+// Component for Spotify section
+function SpotifySection() {
+  const [topArtists, setTopArtists] = useState<Array<{ name: string; external_urls: { spotify: string }; images: Array<{ url: string }> }>>([])
+  const [topTracks, setTopTracks] = useState<Array<{ name: string; artists: Array<{ name: string }>; external_urls: { spotify: string }; album: { images: Array<{ url: string }> } }>>([])
+  const [loading, setLoading] = useState(true)
+  const [activeTab, setActiveTab] = useState<"artists" | "tracks">("tracks")
+
+  useEffect(() => {
+    async function fetchSpotifyData() {
+      try {
+        const [artistsRes, tracksRes] = await Promise.all([
+          fetch("/api/spotify?type=artists&limit=10&time_range=medium_term"),
+          fetch("/api/spotify?type=tracks&limit=10&time_range=medium_term"),
+        ])
+
+        const artistsData = await artistsRes.json()
+        const tracksData = await tracksRes.json()
+
+        if (artistsData.items) {
+          setTopArtists(artistsData.items)
+        }
+        if (tracksData.items) {
+          setTopTracks(tracksData.items)
+        }
+      } catch (error) {
+        console.error("Failed to fetch Spotify data:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchSpotifyData()
+  }, [])
+
+  return (
+    <div className="space-y-12">
+      <div className="border-b border-stone-800 pb-2">
+        <h2 className="uppercase font-bold tracking-widest text-sm text-zinc-50">Spotify</h2>
+      </div>
+
+      <div className="flex gap-4 mb-8">
+        <button
+          onClick={() => setActiveTab("artists")}
+          className={cn(
+            "text-xs uppercase tracking-widest transition-colors",
+            activeTab === "artists" ? "text-zinc-50" : "text-zinc-500 hover:text-zinc-300"
+          )}
+        >
+          Top Artists
+        </button>
+        <div className="w-px h-4 bg-stone-800 self-center"></div>
+        <button
+          onClick={() => setActiveTab("tracks")}
+          className={cn(
+            "text-xs uppercase tracking-widest transition-colors",
+            activeTab === "tracks" ? "text-zinc-50" : "text-zinc-500 hover:text-zinc-300"
+          )}
+        >
+          Top Tracks
+        </button>
+      </div>
+
+      {loading ? (
+        <p className="text-sm text-zinc-400">Loading...</p>
+      ) : (
+        <div className="space-y-4">
+          {activeTab === "artists" ? (
+            topArtists.length > 0 ? (
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                {topArtists.map((artist, index) => (
+                  <Link
+                    key={index}
+                    href={artist.external_urls.spotify}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col items-center text-center space-y-2 hover:opacity-80 transition-opacity"
+                  >
+                    {artist.images && artist.images[0] && (
+                      <div className="relative w-full aspect-square rounded-full overflow-hidden border border-stone-800 group-hover:border-stone-700 transition-colors">
+                        <Image
+                          src={artist.images[0].url}
+                          alt={artist.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                    <p className="text-xs text-zinc-300 group-hover:text-zinc-50 transition-colors">{artist.name}</p>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-zinc-400">No artist data available. Make sure SPOTIFY_ACCESS_TOKEN or SPOTIFY_REFRESH_TOKEN is set in your .env.local file.</p>
+            )
+          ) : (
+            topTracks.length > 0 ? (
+              <div className="space-y-2">
+                {topTracks.map((track, index) => (
+                  <Link
+                    key={index}
+                    href={track.external_urls.spotify}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 border-b border-stone-800 pb-4 hover:border-stone-700 group transition-colors"
+                  >
+                    <span className="text-xs text-zinc-500 w-6">{index + 1}</span>
+                    {track.album?.images && track.album.images[0] && (
+                      <div className="relative w-12 h-12 rounded overflow-hidden border border-stone-800 group-hover:border-stone-700 transition-colors">
+                        <Image
+                          src={track.album.images[0].url}
+                          alt={track.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-zinc-300 group-hover:text-zinc-50 transition-colors truncate">{track.name}</p>
+                      <p className="text-xs text-zinc-500 truncate">
+                        {track.artists.map((a) => a.name).join(", ")}
+                      </p>
+                    </div>
+                    <ExternalLink className="w-3 h-3 text-zinc-500 group-hover:text-zinc-300 transition-colors flex-shrink-0" />
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-zinc-400">No track data available. Make sure SPOTIFY_ACCESS_TOKEN or SPOTIFY_REFRESH_TOKEN is set in your .env.local file.</p>
+            )
+          )}
+        </div>
+      )}
     </div>
   )
 }
