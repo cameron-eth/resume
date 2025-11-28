@@ -22,7 +22,7 @@ export default function Page() {
       </div>
       
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-sm border-b border-stone-800">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950 border-b border-stone-800">
         <div className={cn(containerClass, "py-6 flex justify-between items-center")}>
           <Link href="/" className="text-zinc-50 uppercase tracking-widest text-sm font-medium hover:text-zinc-300 transition-colors">
             Cameron
