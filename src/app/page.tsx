@@ -46,10 +46,10 @@ export default function Page() {
         </div>
       </nav>
 
-      <main className={cn(containerClass, "pt-32 pb-16 relative z-10")}>
+      <main className={cn(containerClass, "pt-24 md:pt-32 pb-16 relative z-10")}>
         {/* About Section */}
-        <section id="about" className="pt-8 pb-8 scroll-mt-24">
-          <div className="space-y-8">
+        <section id="about" className="pt-4 md:pt-8 pb-4 md:pb-8 scroll-mt-24">
+          <div className="space-y-4 md:space-y-8">
             <div>
               <div className="flex items-start justify-between gap-8">
                 <div className="flex-1">
@@ -107,12 +107,12 @@ export default function Page() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-16 scroll-mt-24">
+        <section id="projects" className="py-8 md:py-16 scroll-mt-24">
           <ProjectsCarousel />
         </section>
 
         {/* Spotify Section */}
-        <section id="spotify" className="py-16 scroll-mt-24">
+        <section id="spotify" className="py-8 md:py-16 scroll-mt-24">
           <SpotifySection />
         </section>
       </main>
