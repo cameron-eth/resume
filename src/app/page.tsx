@@ -263,7 +263,14 @@ function ProjectCard({
 function ProjectsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const projects = [
+  const projects: Array<{
+    title: string
+    categories: Array<{ name: string; color: "zinc" | "stone" }>
+    description: string
+    details: string
+    link: string
+    image: string
+  }> = [
     {
       title: "BETSYNC",
       categories: [

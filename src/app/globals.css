@@ -72,6 +72,9 @@ body {
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-zinc-950 text-foreground;
+  }
+  html {
+    @apply bg-zinc-950;
   }
 }
