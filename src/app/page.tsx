@@ -12,13 +12,13 @@ import { FlickeringGrid } from "@/components/FlickeringGrid"
 export default function Page() {
   const [activeSection, setActiveSection] = useState("about")
 
-  const containerClass = "max-w-6xl mx-auto px-6 md:px-12"
+  const containerClass = "max-w-6xl mx-auto px-4 md:px-12"
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-50 font-sans relative">
       {/* Flickering Grid Background */}
-      <div className="fixed inset-0 z-0 opacity-20">
-        <FlickeringGrid squareSize={3} gridGap={4} flickerChance={0.2} maxOpacity={0.15} />
+      <div className="fixed inset-0 z-0 opacity-30">
+        <FlickeringGrid squareSize={3} gridGap={4} flickerChance={0.5} maxOpacity={0.4} />
       </div>
       
       {/* Navigation */}
@@ -51,55 +51,56 @@ export default function Page() {
         <section id="about" className="pt-4 md:pt-8 pb-4 md:pb-8 scroll-mt-24">
           <div className="space-y-4 md:space-y-8">
             <div>
-              <div className="flex items-start justify-between gap-8">
-                <div className="flex-1">
-                  <div className="flex items-center justify-between mb-2">
-                    <h1 className="text-3xl md:text-4xl font-light text-zinc-50 tracking-tight">
+              <div className="flex items-start justify-between gap-4 md:gap-8">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-2 gap-2">
+                    <h1 className="text-2xl md:text-4xl font-light text-zinc-50 tracking-tight flex-shrink-0">
                       <span className="font-semibold">Cameron Norfleet</span>
                     </h1>
                     <Link
                       href="https://x.com/camfleety"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-zinc-500 hover:text-zinc-300 transition-colors"
+                      className="text-xs md:text-sm text-zinc-500 hover:text-zinc-300 transition-colors whitespace-nowrap flex-shrink-0"
                     >
                       @camfleety
                     </Link>
                   </div>
-                  <div className="flex items-center gap-4 text-sm text-zinc-400">
-                    <span>Followers: 1.2k</span>
-                    <span className="text-zinc-600">•</span>
-                    <span>Age: 26</span>
-                    <span className="text-zinc-600">•</span>
-                    <span>Hometown: Berkeley, CA</span>
+                  <div className="flex flex-wrap items-center gap-2 md:gap-4 text-xs md:text-sm text-zinc-400">
+                    <span className="whitespace-nowrap">Followers: 1.2k</span>
+                    <span className="text-zinc-600 hidden md:inline">•</span>
+                    <span className="text-zinc-600 md:hidden">•</span>
+                    <span className="whitespace-nowrap">Age: 26</span>
+                    <span className="text-zinc-600 hidden md:inline">•</span>
+                    <span className="text-zinc-600 md:hidden">•</span>
+                    <span className="whitespace-nowrap">Hometown: Berkeley, CA</span>
                   </div>
                 </div>
               </div>
               <div className="border-b border-stone-800 pb-2 mt-4"></div>
             </div>
             
-            <div className="space-y-6 text-sm text-zinc-400">
-              
+            <div className="space-y-4 md:space-y-6 text-sm text-zinc-400">
               <div className="flex flex-col md:flex-row md:gap-12 gap-4">
-                <div className="flex flex-col">
-                  <span className="text-zinc-500">Occupation</span>
-                  <span className="text-zinc-300">Agent Engineer, Amigo</span>
+                <div className="flex flex-col gap-1">
+                  <span className="text-zinc-500 text-xs md:text-sm">Occupation</span>
+                  <span className="text-zinc-300 text-sm md:text-base whitespace-nowrap">Agent Engineer, Amigo</span>
                 </div>
                 
                 <div className="hidden md:block w-px h-4 bg-stone-800 self-center"></div>
-                <div className="md:hidden border-b border-stone-800"></div>
+                <div className="md:hidden border-b border-stone-800 -mx-4"></div>
                 
-                <div className="flex flex-col">
-                  <span className="text-zinc-500">Location</span>
-                  <span className="text-zinc-300">Brooklyn, New York</span>
+                <div className="flex flex-col gap-1">
+                  <span className="text-zinc-500 text-xs md:text-sm">Location</span>
+                  <span className="text-zinc-300 text-sm md:text-base whitespace-nowrap">Brooklyn, New York</span>
                 </div>
                 
                 <div className="hidden md:block w-px h-4 bg-stone-800 self-center"></div>
-                <div className="md:hidden border-b border-stone-800"></div>
+                <div className="md:hidden border-b border-stone-800 -mx-4"></div>
                 
-                <div className="flex flex-col">
-                  <span className="text-zinc-500">Education</span>
-                  <span className="text-zinc-300">Information System & Data Analytics, San Jose State University</span>
+                <div className="flex flex-col gap-1">
+                  <span className="text-zinc-500 text-xs md:text-sm">Education</span>
+                  <span className="text-zinc-300 text-sm md:text-base break-words">Information System & Data Analytics, San Jose State University</span>
                 </div>
               </div>
             </div>
@@ -117,12 +118,12 @@ export default function Page() {
         </section>
       </main>
 
-      <footer className="border-t border-stone-800 py-12">
+      <footer className="border-t border-stone-800 py-8 md:py-12">
         <div className={containerClass}>
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-8">
             <p className="text-xs uppercase tracking-widest text-zinc-500">© {new Date().getFullYear()} Cameron Norfleet</p>
             
-            <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-8">
               <div className="flex items-center gap-2">
                 <p className="text-xs uppercase tracking-widest text-zinc-500">Email</p>
                 <Link href="mailto:camfleety@gmail.com" className="text-xs text-zinc-300 hover:text-zinc-50 hover:underline transition-colors">
@@ -337,7 +338,7 @@ function ProjectsCarousel() {
       </div>
 
       <div className="relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 md:gap-x-12 gap-y-8 md:gap-y-16">
           {currentProjects.map((project, index) => (
             <ProjectCard
               key={`${project.title}-${currentIndex + index}`}
@@ -352,14 +353,14 @@ function ProjectsCarousel() {
         </div>
 
         {totalPages > 1 && (
-          <div className="flex items-center justify-between mt-8">
+          <div className="flex items-center justify-between mt-6 md:mt-8 gap-2">
             <button
               onClick={prevSlide}
-              className="flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-500 hover:text-zinc-300 transition-colors"
+              className="flex items-center gap-1 md:gap-2 text-xs uppercase tracking-widest text-zinc-500 hover:text-zinc-300 transition-colors"
               aria-label="Previous projects"
             >
-              <ChevronLeft className="w-4 h-4" />
-              Previous
+              <ChevronLeft className="w-3 h-3 md:w-4 md:h-4" />
+              <span className="hidden sm:inline">Previous</span>
             </button>
 
             <div className="flex gap-2">
@@ -381,11 +382,11 @@ function ProjectsCarousel() {
 
             <button
               onClick={nextSlide}
-              className="flex items-center gap-2 text-xs uppercase tracking-widest text-zinc-500 hover:text-zinc-300 transition-colors"
+              className="flex items-center gap-1 md:gap-2 text-xs uppercase tracking-widest text-zinc-500 hover:text-zinc-300 transition-colors"
               aria-label="Next projects"
             >
-              Next
-              <ChevronRight className="w-4 h-4" />
+              <span className="hidden sm:inline">Next</span>
+              <ChevronRight className="w-3 h-3 md:w-4 md:h-4" />
             </button>
           </div>
         )}
