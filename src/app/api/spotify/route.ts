@@ -9,39 +9,33 @@ const SPOTIFY_REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN || ''
 const SPOTIFY_ACCESS_TOKEN = process.env.SPOTIFY_ACCESS_TOKEN || '' // Temporary access token for testing
 
 async function getAccessToken() {
-  // If a temporary access token is provided, use it (for testing)
+  // Prioritize refresh token if available (permanent solution)
+  if (SPOTIFY_REFRESH_TOKEN && SPOTIFY_REFRESH_TOKEN.trim() !== '') {
+    const response = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Basic ${Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64')}`,
+      },
+      body: new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: SPOTIFY_REFRESH_TOKEN,
+      }),
+    })
+
+    if (response.ok) {
+      const data = await response.json()
+      return data.access_token
+    }
+    // If refresh fails, fall through to access token
+  }
+
+  // Fallback to temporary access token if no refresh token or refresh failed
   if (SPOTIFY_ACCESS_TOKEN && SPOTIFY_ACCESS_TOKEN.trim() !== '') {
     return SPOTIFY_ACCESS_TOKEN
   }
 
-  // Otherwise, use refresh token to get a new access token
-  if (!SPOTIFY_REFRESH_TOKEN || SPOTIFY_REFRESH_TOKEN.trim() === '') {
-    throw new Error('No refresh token or access token provided')
-  }
-
-  const response = await fetch('https://accounts.spotify.com/api/token', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: `Basic ${Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64')}`,
-    },
-    body: new URLSearchParams({
-      grant_type: 'refresh_token',
-      refresh_token: SPOTIFY_REFRESH_TOKEN,
-    }),
-  })
-
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}))
-    // Only log error if we don't have a fallback access token
-    if (!SPOTIFY_ACCESS_TOKEN || SPOTIFY_ACCESS_TOKEN.trim() === '') {
-      console.error('Spotify token error:', response.status, errorData)
-    }
-    throw new Error(`Failed to get access token: ${response.status}`)
-  }
-
-  const data = await response.json()
-  return data.access_token
+  throw new Error('No valid refresh token or access token provided')
 }
 
 export async function GET(request: Request) {
@@ -52,8 +46,7 @@ export async function GET(request: Request) {
     const timeRange = searchParams.get('time_range') || 'medium_term'
     const limit = searchParams.get('limit') || '10'
     const query = searchParams.get('q') // For search endpoint
-
-    // If no refresh token or access token, return empty data gracefully
+    // Use server-side tokens (your Spotify account)
     if ((!SPOTIFY_REFRESH_TOKEN || SPOTIFY_REFRESH_TOKEN.trim() === '') && 
         (!SPOTIFY_ACCESS_TOKEN || SPOTIFY_ACCESS_TOKEN.trim() === '')) {
       return NextResponse.json({ items: [] })
@@ -62,8 +55,19 @@ export async function GET(request: Request) {
     const accessToken = await getAccessToken()
 
     let apiUrl: string
-    if (endpoint === 'search' && query) {
-      apiUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=1`
+    const audiobookId = searchParams.get('audiobook_id')
+    const showId = searchParams.get('show_id')
+    
+    if (audiobookId) {
+      // Fetch specific audiobook
+      apiUrl = `https://api.spotify.com/v1/audiobooks/${audiobookId}`
+    } else if (showId) {
+      // Fetch specific show/podcast
+      apiUrl = `https://api.spotify.com/v1/shows/${showId}`
+    } else if (endpoint === 'search' && query) {
+      const searchType = searchParams.get('search_type') || 'track'
+      const searchLimit = searchParams.get('limit') || '1'
+      apiUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=${searchType}&limit=${searchLimit}`
     } else {
       apiUrl = `https://api.spotify.com/v1/me/top/${type}?time_range=${timeRange}&limit=${limit}`
     }
@@ -76,6 +80,25 @@ export async function GET(request: Request) {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}))
+      
+      // If access token expired, try refreshing
+      if (response.status === 401 && SPOTIFY_REFRESH_TOKEN) {
+        try {
+          const newAccessToken = await getAccessToken()
+          const retryResponse = await fetch(apiUrl, {
+            headers: {
+              Authorization: `Bearer ${newAccessToken}`,
+            },
+          })
+          if (retryResponse.ok) {
+            const retryData = await retryResponse.json()
+            return NextResponse.json(retryData)
+          }
+        } catch (retryError) {
+          console.error('Failed to refresh token:', retryError)
+        }
+      }
+      
       console.error('Spotify API error:', response.status, errorData)
       return NextResponse.json({ items: [] })
     }

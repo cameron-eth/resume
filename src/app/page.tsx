@@ -67,11 +67,11 @@ export default function Page() {
                     </Link>
                   </div>
                   <div className="flex items-center gap-4 text-sm text-zinc-400">
+                    <span>Followers: 1.2k</span>
+                    <span className="text-zinc-600">•</span>
                     <span>Age: 26</span>
                     <span className="text-zinc-600">•</span>
-                    <span>Height: 6-01</span>
-                    <span className="text-zinc-600">•</span>
-                    <span>Weight: 190 lbs</span>
+                    <span>Hometown: Berkeley, CA</span>
                   </div>
                 </div>
               </div>
@@ -133,7 +133,7 @@ export default function Page() {
               <div className="flex items-center gap-2">
                 <p className="text-xs uppercase tracking-widest text-zinc-500">LinkedIn</p>
                 <Link
-                  href="https://www.linkedin.com/in/cameron-norfleet-b42885162/"
+                  href="https://www.linkedin.com/in/cameron-n-b42885162/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-zinc-300 hover:text-zinc-50 hover:underline flex items-center gap-1 transition-colors"
@@ -444,25 +444,63 @@ const MANUAL_TRACKS = [
 function SpotifySection() {
   const [topArtists, setTopArtists] = useState<Array<{ name: string; external_urls: { spotify: string }; images: Array<{ url: string }> }>>([])
   const [topTracks, setTopTracks] = useState<Array<{ name: string; artists: Array<{ name: string }>; external_urls: { spotify: string }; album: { images: Array<{ url: string }> } }>>([])
+  const [audiobooks, setAudiobooks] = useState<Array<{ name: string; authors: Array<{ name: string }>; external_urls: { spotify: string }; images: Array<{ url: string }> }>>([
+    {
+      name: "On the Edge: The Art of Risking Everything",
+      authors: [{ name: "Nate Silver" }],
+      external_urls: { spotify: "https://open.spotify.com/show/2H57oQFCKiykdfGg97iGDg" },
+      images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }],
+    },
+  ])
   const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState<"artists" | "tracks">("tracks")
+  const [activeTab, setActiveTab] = useState<"artists" | "tracks" | "audiobooks">("tracks")
 
   useEffect(() => {
     async function fetchSpotifyData() {
       try {
-        const [artistsRes, tracksRes] = await Promise.all([
+        // First search for the audiobook, then fetch it by ID
+        const [artistsRes, tracksRes, audiobookSearchRes] = await Promise.all([
           fetch("/api/spotify?type=artists&limit=10&time_range=medium_term"),
-          fetch("/api/spotify?type=tracks&limit=10&time_range=medium_term"),
+          fetch("/api/spotify?type=tracks&limit=5&time_range=medium_term"),
+          fetch("/api/spotify?endpoint=search&q=On%20the%20Edge%20Nate%20Silver&search_type=audiobook&limit=5"),
         ])
 
         const artistsData = await artistsRes.json()
         const tracksData = await tracksRes.json()
+        const audiobookSearchData = await audiobookSearchRes.json()
 
         if (artistsData.items) {
           setTopArtists(artistsData.items)
         }
         if (tracksData.items) {
           setTopTracks(tracksData.items)
+        }
+        
+        // Try to find and fetch the audiobook
+        if (audiobookSearchData.audiobooks && audiobookSearchData.audiobooks.items && audiobookSearchData.audiobooks.items.length > 0) {
+          const foundAudiobook = audiobookSearchData.audiobooks.items[0]
+          setAudiobooks([{
+            name: foundAudiobook.name,
+            authors: foundAudiobook.authors || [{ name: "Nate Silver" }],
+            external_urls: foundAudiobook.external_urls || { spotify: "https://open.spotify.com/show/2H57oQFCKiykdfGg97iGDg" },
+            images: foundAudiobook.images || [],
+          }])
+        } else {
+          // Fallback: try fetching by show ID if audiobook search doesn't work
+          try {
+            const showRes = await fetch("/api/spotify?show_id=2H57oQFCKiykdfGg97iGDg")
+            const showData = await showRes.json()
+            if (showData && showData.images && showData.images.length > 0) {
+              setAudiobooks([{
+                name: showData.name || "On the Edge: The Art of Risking Everything",
+                authors: [{ name: "Nate Silver" }],
+                external_urls: showData.external_urls || { spotify: "https://open.spotify.com/show/2H57oQFCKiykdfGg97iGDg" },
+                images: showData.images,
+              }])
+            }
+          } catch (showError) {
+            console.error("Failed to fetch show data:", showError)
+          }
         }
       } catch (error) {
         console.error("Failed to fetch Spotify data:", error)
@@ -500,6 +538,16 @@ function SpotifySection() {
         >
           Top Tracks
         </button>
+        <div className="w-px h-4 bg-stone-800 self-center"></div>
+        <button
+          onClick={() => setActiveTab("audiobooks")}
+          className={cn(
+            "text-xs uppercase tracking-widest transition-colors",
+            activeTab === "audiobooks" ? "text-zinc-50" : "text-zinc-500 hover:text-zinc-300"
+          )}
+        >
+          Audiobooks
+        </button>
       </div>
 
       {loading ? (
@@ -534,7 +582,7 @@ function SpotifySection() {
             ) : (
               <p className="text-sm text-zinc-400">No artist data available. Make sure SPOTIFY_ACCESS_TOKEN or SPOTIFY_REFRESH_TOKEN is set in your .env.local file.</p>
             )
-          ) : (
+          ) : activeTab === "tracks" ? (
             topTracks.length > 0 ? (
               <div className="space-y-2">
                 {topTracks.map((track, index) => (
@@ -568,6 +616,41 @@ function SpotifySection() {
               </div>
             ) : (
               <p className="text-sm text-zinc-400">No track data available. Make sure SPOTIFY_ACCESS_TOKEN or SPOTIFY_REFRESH_TOKEN is set in your .env.local file.</p>
+            )
+          ) : (
+            audiobooks.length > 0 ? (
+              <div className="space-y-2">
+                {audiobooks.map((book, index) => (
+                  <Link
+                    key={index}
+                    href={book.external_urls.spotify}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 border-b border-stone-800 pb-4 hover:border-stone-700 group transition-colors"
+                  >
+                    <span className="text-xs text-zinc-500 w-6">{index + 1}</span>
+                    {book.images && book.images[0] && (
+                      <div className="relative w-12 h-12 rounded overflow-hidden border border-stone-800 group-hover:border-stone-700 transition-colors">
+                        <Image
+                          src={book.images[0].url}
+                          alt={book.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-zinc-300 group-hover:text-zinc-50 transition-colors truncate">{book.name}</p>
+                      <p className="text-xs text-zinc-500 truncate">
+                        {book.authors.map((a) => a.name).join(", ")}
+                      </p>
+                    </div>
+                    <ExternalLink className="w-3 h-3 text-zinc-500 group-hover:text-zinc-300 transition-colors flex-shrink-0" />
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-zinc-400">No audiobook data available.</p>
             )
           )}
         </div>
