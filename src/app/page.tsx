@@ -53,15 +53,15 @@ export default function Page() {
             <div>
               <div className="flex items-start justify-between gap-4 md:gap-8">
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between mb-2 gap-2">
-                    <h1 className="text-2xl md:text-4xl font-light text-zinc-50 tracking-tight flex-shrink-0">
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <h1 className="text-2xl md:text-4xl font-light text-zinc-50 tracking-tight">
                       <span className="font-semibold">Cameron Norfleet</span>
                     </h1>
                     <Link
                       href="https://x.com/camfleety"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs md:text-sm text-zinc-500 hover:text-zinc-300 transition-colors whitespace-nowrap flex-shrink-0"
+                      className="text-xs md:text-sm text-zinc-500 hover:text-zinc-300 transition-colors whitespace-nowrap"
                     >
                       @camfleety
                     </Link>
