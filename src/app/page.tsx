@@ -17,8 +17,8 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-50 font-sans relative">
       {/* Flickering Grid Background */}
-      <div className="fixed inset-0 z-0 opacity-30">
-        <FlickeringGrid squareSize={3} gridGap={4} flickerChance={0.5} maxOpacity={0.4} />
+      <div className="fixed inset-0 z-0 opacity-20">
+        <FlickeringGrid squareSize={3} gridGap={4} flickerChance={0.2} maxOpacity={0.15} />
       </div>
       
       {/* Navigation */}
