@@ -3,8 +3,8 @@ import { NextResponse } from 'next/server'
 // Spotify API Configuration
 // Note: As of 2025, Spotify requires redirect URIs to use http://127.0.0.1 instead of http://localhost
 // Make sure your Spotify app's redirect URI is set to: http://127.0.0.1:3000
-const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID || 'eed4801111f64450ad0dcf2455f439bb'
-const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET || '069f8af42096432da9dff6bd01e3bb06'
+const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID || '10fdb1f3181f498e952d0a72ec2cde2a'
+const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET || '036942167f54452d93b4c73240129b22'
 const SPOTIFY_REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN || ''
 const SPOTIFY_ACCESS_TOKEN = process.env.SPOTIFY_ACCESS_TOKEN || '' // Temporary access token for testing
 
@@ -57,8 +57,13 @@ export async function GET(request: Request) {
     let apiUrl: string
     const audiobookId = searchParams.get('audiobook_id')
     const showId = searchParams.get('show_id')
+    const artistId = searchParams.get('artist_id')
     
-    if (audiobookId) {
+    if (artistId) {
+      // Fetch specific artist by ID
+      // GET /artists/{id} - returns artist details including followers, genres, images, popularity
+      apiUrl = `https://api.spotify.com/v1/artists/${artistId}`
+    } else if (audiobookId) {
       // Fetch specific audiobook
       apiUrl = `https://api.spotify.com/v1/audiobooks/${audiobookId}`
     } else if (showId) {

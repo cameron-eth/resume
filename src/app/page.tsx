@@ -15,16 +15,16 @@ export default function Page() {
   const containerClass = "max-w-6xl mx-auto px-4 md:px-12"
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-50 font-sans relative">
+    <div className="min-h-screen font-sans relative" style={{ backgroundColor: 'var(--warm-bg)', color: 'var(--warm-cream)' }}>
       {/* Flickering Grid Background */}
-      <div className="fixed inset-0 z-0 opacity-20">
-        <FlickeringGrid squareSize={3} gridGap={4} flickerChance={0.2} maxOpacity={0.15} />
+      <div className="fixed inset-0 z-0 opacity-25">
+        <FlickeringGrid squareSize={3} gridGap={4} flickerChance={0.2} maxOpacity={0.2} />
       </div>
       
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950 border-b border-stone-800">
+      <nav className="fixed top-0 left-0 right-0 z-50" style={{ backgroundColor: 'var(--warm-bg)', borderBottom: '1px solid var(--warm-border)' }}>
         <div className={cn(containerClass, "py-6 flex justify-between items-center")}>
-          <Link href="/" className="text-zinc-50 uppercase tracking-widest text-sm font-medium hover:text-zinc-300 transition-colors">
+          <Link href="/" className="uppercase tracking-widest text-sm font-medium transition-colors" style={{ color: 'var(--warm-cream)' }}>
             Cameron
           </Link>
 
@@ -54,53 +54,58 @@ export default function Page() {
               <div className="flex items-start justify-between gap-4 md:gap-8">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2 flex-wrap">
-                    <h1 className="text-2xl md:text-4xl font-light text-zinc-50 tracking-tight">
+                    <h1 className="text-2xl md:text-4xl font-light tracking-tight" style={{ color: 'var(--warm-cream)' }}>
                       <span className="font-semibold">Cameron Norfleet</span>
                     </h1>
                     <Link
                       href="https://x.com/camfleety"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs md:text-sm text-zinc-500 hover:text-zinc-300 transition-colors whitespace-nowrap"
+                      className="text-xs md:text-sm transition-colors whitespace-nowrap px-2 py-0.5 rounded"
+                      style={{ 
+                        color: 'var(--warm-orange)', 
+                        backgroundColor: 'rgba(200, 121, 65, 0.15)',
+                        border: '1px solid rgba(200, 121, 65, 0.3)'
+                      }}
                     >
                       @camfleety
                     </Link>
                   </div>
-                  <div className="flex flex-wrap items-center gap-2 md:gap-4 text-xs md:text-sm text-zinc-400">
+                  <div className="flex flex-wrap items-center gap-2 md:gap-4 text-xs md:text-sm" style={{ color: 'var(--warm-muted)' }}>
                     <span className="whitespace-nowrap">Followers: 1.2k</span>
-                    <span className="text-zinc-600 hidden md:inline">•</span>
-                    <span className="text-zinc-600 md:hidden">•</span>
+                    <span className="hidden md:inline" style={{ color: 'var(--warm-muted-dim)' }}>•</span>
+                    <span className="md:hidden" style={{ color: 'var(--warm-muted-dim)' }}>•</span>
                     <span className="whitespace-nowrap">Age: 26</span>
-                    <span className="text-zinc-600 hidden md:inline">•</span>
-                    <span className="text-zinc-600 md:hidden">•</span>
+                    <span className="hidden md:inline" style={{ color: 'var(--warm-muted-dim)' }}>•</span>
+                    <span className="md:hidden" style={{ color: 'var(--warm-muted-dim)' }}>•</span>
                     <span className="whitespace-nowrap">Hometown: Berkeley, CA</span>
                   </div>
                 </div>
               </div>
-              <div className="border-b border-stone-800 pb-2 mt-4"></div>
+              <div className="pb-2 mt-4" style={{ borderBottom: '1px solid var(--warm-border)' }}></div>
             </div>
             
-            <div className="space-y-4 md:space-y-6 text-sm text-zinc-400">
+            <div className="space-y-4 md:space-y-6 text-sm" style={{ color: 'var(--warm-muted)' }}>
               <div className="flex flex-col md:flex-row md:gap-12 gap-4">
                 <div className="flex flex-col gap-1">
-                  <span className="text-zinc-500 text-xs md:text-sm">Occupation</span>
-                  <span className="text-zinc-300 text-sm md:text-base whitespace-nowrap">Agent Engineer, Amigo</span>
+                  <span className="text-xs md:text-sm" style={{ color: 'var(--warm-muted-dim)' }}>Occupation</span>
+                  <span className="text-sm md:text-base whitespace-nowrap" style={{ color: 'var(--warm-cream-dim)' }}>Agent Engineer, Amigo</span>
                 </div>
                 
-                <div className="hidden md:block w-px h-4 bg-stone-800 self-center"></div>
-                <div className="md:hidden border-b border-stone-800 -mx-4"></div>
+                <div className="hidden md:block w-px h-4 self-center" style={{ backgroundColor: 'var(--warm-border)' }}></div>
+                <div className="md:hidden -mx-4" style={{ borderBottom: '1px solid var(--warm-border)' }}></div>
                 
                 <div className="flex flex-col gap-1">
-                  <span className="text-zinc-500 text-xs md:text-sm">Location</span>
-                  <span className="text-zinc-300 text-sm md:text-base whitespace-nowrap">Brooklyn, New York</span>
+                  <span className="text-xs md:text-sm" style={{ color: 'var(--warm-muted-dim)' }}>Location</span>
+                  <span className="text-sm md:text-base whitespace-nowrap" style={{ color: 'var(--warm-cream-dim)' }}>Brooklyn, New York</span>
                 </div>
                 
-                <div className="hidden md:block w-px h-4 bg-stone-800 self-center"></div>
-                <div className="md:hidden border-b border-stone-800 -mx-4"></div>
+                <div className="hidden md:block w-px h-4 self-center" style={{ backgroundColor: 'var(--warm-border)' }}></div>
+                <div className="md:hidden -mx-4" style={{ borderBottom: '1px solid var(--warm-border)' }}></div>
                 
                 <div className="flex flex-col gap-1">
-                  <span className="text-zinc-500 text-xs md:text-sm">Education</span>
-                  <span className="text-zinc-300 text-sm md:text-base break-words">Information System & Data Analytics, San Jose State University</span>
+                  <span className="text-xs md:text-sm" style={{ color: 'var(--warm-muted-dim)' }}>Education</span>
+                  <span className="text-sm md:text-base break-words" style={{ color: 'var(--warm-cream-dim)' }}>Information System & Data Analytics, San Jose State University</span>
                 </div>
               </div>
             </div>
@@ -118,26 +123,27 @@ export default function Page() {
         </section>
       </main>
 
-      <footer className="border-t border-stone-800 py-8 md:py-12">
+      <footer className="py-8 md:py-12" style={{ borderTop: '1px solid var(--warm-border)' }}>
         <div className={containerClass}>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-8">
-            <p className="text-xs uppercase tracking-widest text-zinc-500">© {new Date().getFullYear()} Cameron Norfleet</p>
+            <p className="text-xs uppercase tracking-widest" style={{ color: 'var(--warm-muted-dim)' }}>© {new Date().getFullYear()} Cameron Norfleet</p>
             
             <div className="flex flex-col md:flex-row gap-4 md:gap-8">
               <div className="flex items-center gap-2">
-                <p className="text-xs uppercase tracking-widest text-zinc-500">Email</p>
-                <Link href="mailto:camfleety@gmail.com" className="text-xs text-zinc-300 hover:text-zinc-50 hover:underline transition-colors">
+                <p className="text-xs uppercase tracking-widest" style={{ color: 'var(--warm-muted-dim)' }}>Email</p>
+                <Link href="mailto:camfleety@gmail.com" className="text-xs hover:underline transition-colors" style={{ color: 'var(--warm-cream-dim)' }}>
                   camfleety@gmail.com
                 </Link>
               </div>
 
               <div className="flex items-center gap-2">
-                <p className="text-xs uppercase tracking-widest text-zinc-500">LinkedIn</p>
+                <p className="text-xs uppercase tracking-widest" style={{ color: 'var(--warm-muted-dim)' }}>LinkedIn</p>
                 <Link
                   href="https://www.linkedin.com/in/cameron-n-b42885162/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-zinc-300 hover:text-zinc-50 hover:underline flex items-center gap-1 transition-colors"
+                  className="text-xs hover:underline flex items-center gap-1 transition-colors"
+                  style={{ color: 'var(--warm-cream-dim)' }}
                 >
                   View Profile
                   <ExternalLink className="w-3 h-3" />
@@ -145,12 +151,13 @@ export default function Page() {
               </div>
 
               <div className="flex items-center gap-2">
-                <p className="text-xs uppercase tracking-widest text-zinc-500">Twitter</p>
+                <p className="text-xs uppercase tracking-widest" style={{ color: 'var(--warm-muted-dim)' }}>Twitter</p>
                 <Link
                   href="https://x.com/camfleety"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-zinc-300 hover:text-zinc-50 hover:underline flex items-center gap-1 transition-colors"
+                  className="text-xs hover:underline flex items-center gap-1 transition-colors"
+                  style={{ color: 'var(--warm-cream-dim)' }}
                 >
                   @camfleety
                   <ExternalLink className="w-3 h-3" />
@@ -179,7 +186,8 @@ function NavLink({
   return (
     <Link
       href={href}
-      className={`${active ? "text-zinc-50" : "text-zinc-500"} hover:text-zinc-300 transition-colors`}
+      className="transition-colors"
+      style={{ color: active ? 'var(--warm-cream)' : 'var(--warm-muted)', }}
       onClick={onClick}
     >
       {children}
@@ -188,14 +196,26 @@ function NavLink({
 }
 
 // Component for category tags
-function CategoryTag({ name, color }: { name: string; color: "zinc" | "stone" }) {
+function CategoryTag({ name, color }: { name: string; color: "amber" | "olive" | "gold" }) {
   const colorMap = {
-    zinc: "bg-zinc-800 text-zinc-100 border border-zinc-700",
-    stone: "bg-stone-800 text-stone-100 border border-stone-700",
+    amber: { bg: 'rgba(200, 121, 65, 0.15)', text: '#c87941', border: 'rgba(200, 121, 65, 0.3)' },
+    olive: { bg: 'rgba(139, 154, 107, 0.15)', text: '#8b9a6b', border: 'rgba(139, 154, 107, 0.3)' },
+    gold: { bg: 'rgba(201, 168, 96, 0.15)', text: '#c9a860', border: 'rgba(201, 168, 96, 0.3)' },
   }
 
+  const colors = colorMap[color]
+
   return (
-    <span className={cn("px-2 py-0.5 text-[10px] uppercase tracking-wider font-medium", colorMap[color])}>{name}</span>
+    <span 
+      className="px-2 py-0.5 text-[10px] uppercase tracking-wider font-medium"
+      style={{ 
+        backgroundColor: colors.bg, 
+        color: colors.text, 
+        border: `1px solid ${colors.border}` 
+      }}
+    >
+      {name}
+    </span>
   )
 }
 
@@ -209,18 +229,21 @@ function ProjectCard({
   image,
 }: {
   title: string
-  categories: Array<{ name: string; color: "zinc" | "stone" }>
+  categories: Array<{ name: string; color: "amber" | "olive" | "gold" }>
   description: string
   details: string
   link: string
   image?: string
 }) {
   return (
-    <div className="group border-t border-stone-800 pt-4">
+    <div className="group pt-4" style={{ borderTop: '1px solid var(--warm-border)' }}>
       <div className="flex flex-col">
         {/* Product Preview Image */}
         {image && (
-          <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden border border-stone-800 bg-zinc-900 group-hover:border-stone-700 transition-colors">
+          <div 
+            className="relative w-full h-48 mb-4 rounded-lg overflow-hidden transition-colors"
+            style={{ border: '1px solid var(--warm-border)', backgroundColor: 'var(--warm-bg-elevated)' }}
+          >
             <Image
               src={image}
               alt={`${title} preview`}
@@ -235,12 +258,13 @@ function ProjectCard({
         )}
 
         <div className="flex justify-between items-start">
-          <h3 className="text-sm uppercase tracking-widest text-zinc-50">{title}</h3>
+          <h3 className="text-sm uppercase tracking-widest" style={{ color: 'var(--warm-cream)' }}>{title}</h3>
           <Link
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs uppercase tracking-widest text-zinc-400 hover:text-zinc-300 hover:underline flex items-center gap-2 transition-colors"
+            className="text-xs uppercase tracking-widest hover:underline flex items-center gap-2 transition-colors"
+            style={{ color: 'var(--warm-orange)' }}
           >
             View
             <ExternalLink className="w-3 h-3" />
@@ -253,8 +277,8 @@ function ProjectCard({
           ))}
         </div>
 
-        <p className="text-xs mt-4 leading-relaxed text-zinc-400">{description}</p>
-        <p className="text-xs mt-4 font-medium text-zinc-300">{details}</p>
+        <p className="text-xs mt-4 leading-relaxed" style={{ color: 'var(--warm-muted)' }}>{description}</p>
+        <p className="text-xs mt-4 font-medium" style={{ color: 'var(--warm-orange)' }}>{details}</p>
       </div>
     </div>
   )
@@ -266,7 +290,7 @@ function ProjectsCarousel() {
 
   const projects: Array<{
     title: string
-    categories: Array<{ name: string; color: "zinc" | "stone" }>
+    categories: Array<{ name: string; color: "amber" | "olive" | "gold" }>
     description: string
     details: string
     link: string
@@ -275,8 +299,8 @@ function ProjectsCarousel() {
     {
       title: "BETSYNC",
       categories: [
-        { name: "ENGINEERING", color: "zinc" },
-        { name: "PRODUCT", color: "stone" },
+        { name: "ENGINEERING", color: "olive" },
+        { name: "PRODUCT", color: "gold" },
       ],
       description: "A sports betting platform that syncs with sportsbooks to track bets, provide analytics, and offer insights for bettors.",
       details: "$2.1k MRR SaaS",
@@ -286,8 +310,8 @@ function ProjectsCarousel() {
     {
       title: "HIERLOOM AI",
       categories: [
-        { name: "PRODUCT", color: "stone" },
-        { name: "DESIGN", color: "zinc" },
+        { name: "PRODUCT", color: "gold" },
+        { name: "DESIGN", color: "amber" },
       ],
       description: "AI-driven platform for preserving and sharing family stories and memories through interactive digital experiences.",
       details: "Not Launched",
@@ -297,8 +321,8 @@ function ProjectsCarousel() {
     {
       title: "FIRST BALLOT FF",
       categories: [
-        { name: "ENGINEERING", color: "zinc" },
-        { name: "PRODUCT", color: "stone" },
+        { name: "ENGINEERING", color: "olive" },
+        { name: "PRODUCT", color: "gold" },
       ],
       description: "Fantasy football platform providing advanced analytics, insights, and tools for competitive fantasy football players.",
       details: "",
@@ -308,9 +332,9 @@ function ProjectsCarousel() {
     {
       title: "DRAFT THEORY",
       categories: [
-        { name: "DATA", color: "zinc" },
-        { name: "ANALYSIS", color: "stone" },
-        { name: "MODELING", color: "zinc" },
+        { name: "DATA", color: "amber" },
+        { name: "ANALYSIS", color: "gold" },
+        { name: "MODELING", color: "olive" },
       ],
       description: "Comprehensive EDA modeling the predictability of the NFL draft with deep analysis surrounding +EV in the NFL's talent market. Advanced analytics using 42 pre-draft features across 2,397 players (2015-2024).",
       details: "R² = 0.414 • 41.4% Variance Explained",
@@ -333,8 +357,8 @@ function ProjectsCarousel() {
 
   return (
     <div className="space-y-12">
-      <div className="border-stone-800 pb-2">
-        <h2 className="uppercase font-bold tracking-widest text-sm text-zinc-50">Projects</h2>
+      <div className="pb-2" style={{ borderBottom: '1px solid var(--warm-border)' }}>
+        <h2 className="uppercase font-bold tracking-widest text-sm" style={{ color: 'var(--warm-cream)' }}>Projects</h2>
       </div>
 
       <div className="relative">
@@ -356,7 +380,8 @@ function ProjectsCarousel() {
           <div className="flex items-center justify-between mt-6 md:mt-8 gap-2">
             <button
               onClick={prevSlide}
-              className="flex items-center gap-1 md:gap-2 text-xs uppercase tracking-widest text-zinc-500 hover:text-zinc-300 transition-colors"
+              className="flex items-center gap-1 md:gap-2 text-xs uppercase tracking-widest transition-colors"
+              style={{ color: 'var(--warm-muted)' }}
               aria-label="Previous projects"
             >
               <ChevronLeft className="w-3 h-3 md:w-4 md:h-4" />
@@ -370,10 +395,12 @@ function ProjectsCarousel() {
                   <button
                     key={index}
                     onClick={() => setCurrentIndex(pageStartIndex)}
-                    className={cn(
-                      "w-2 h-2 rounded-full transition-colors",
-                      currentIndex === pageStartIndex ? "bg-zinc-50" : "bg-stone-800 hover:bg-stone-700"
-                    )}
+                    className="w-2 h-2 rounded-full transition-colors"
+                    style={{ 
+                      backgroundColor: currentIndex === pageStartIndex 
+                        ? 'var(--warm-orange)' 
+                        : 'var(--warm-border)' 
+                    }}
                     aria-label={`Go to page ${index + 1}`}
                   />
                 )
@@ -382,7 +409,8 @@ function ProjectsCarousel() {
 
             <button
               onClick={nextSlide}
-              className="flex items-center gap-1 md:gap-2 text-xs uppercase tracking-widest text-zinc-500 hover:text-zinc-300 transition-colors"
+              className="flex items-center gap-1 md:gap-2 text-xs uppercase tracking-widest transition-colors"
+              style={{ color: 'var(--warm-muted)' }}
               aria-label="Next projects"
             >
               <span className="hidden sm:inline">Next</span>
@@ -515,44 +543,38 @@ function SpotifySection() {
 
   return (
     <div className="space-y-12">
-      <div className="border-b border-stone-800 pb-2">
-        <h2 className="uppercase font-bold tracking-widest text-sm text-zinc-50">Spotify</h2>
+      <div className="pb-2" style={{ borderBottom: '1px solid var(--warm-border)' }}>
+        <h2 className="uppercase font-bold tracking-widest text-sm" style={{ color: 'var(--warm-cream)' }}>Spotify</h2>
       </div>
 
       <div className="flex gap-4 mb-8">
         <button
           onClick={() => setActiveTab("artists")}
-          className={cn(
-            "text-xs uppercase tracking-widest transition-colors",
-            activeTab === "artists" ? "text-zinc-50" : "text-zinc-500 hover:text-zinc-300"
-          )}
+          className="text-xs uppercase tracking-widest transition-colors"
+          style={{ color: activeTab === "artists" ? 'var(--warm-cream)' : 'var(--warm-muted)' }}
         >
           Top Artists
         </button>
-        <div className="w-px h-4 bg-stone-800 self-center"></div>
+        <div className="w-px h-4 self-center" style={{ backgroundColor: 'var(--warm-border)' }}></div>
         <button
           onClick={() => setActiveTab("tracks")}
-          className={cn(
-            "text-xs uppercase tracking-widest transition-colors",
-            activeTab === "tracks" ? "text-zinc-50" : "text-zinc-500 hover:text-zinc-300"
-          )}
+          className="text-xs uppercase tracking-widest transition-colors"
+          style={{ color: activeTab === "tracks" ? 'var(--warm-cream)' : 'var(--warm-muted)' }}
         >
           Top Tracks
         </button>
-        <div className="w-px h-4 bg-stone-800 self-center"></div>
+        <div className="w-px h-4 self-center" style={{ backgroundColor: 'var(--warm-border)' }}></div>
         <button
           onClick={() => setActiveTab("audiobooks")}
-          className={cn(
-            "text-xs uppercase tracking-widest transition-colors",
-            activeTab === "audiobooks" ? "text-zinc-50" : "text-zinc-500 hover:text-zinc-300"
-          )}
+          className="text-xs uppercase tracking-widest transition-colors"
+          style={{ color: activeTab === "audiobooks" ? 'var(--warm-cream)' : 'var(--warm-muted)' }}
         >
           Audiobooks
         </button>
       </div>
 
       {loading ? (
-        <p className="text-sm text-zinc-400">Loading...</p>
+        <p className="text-sm" style={{ color: 'var(--warm-muted)' }}>Loading...</p>
       ) : (
         <div className="space-y-4">
           {activeTab === "artists" ? (
@@ -567,7 +589,10 @@ function SpotifySection() {
                     className="group flex flex-col items-center text-center space-y-2 hover:opacity-80 transition-opacity"
                   >
                     {artist.images && artist.images[0] && (
-                      <div className="relative w-full aspect-square rounded-full overflow-hidden border border-stone-800 group-hover:border-stone-700 transition-colors">
+                      <div 
+                        className="relative w-full aspect-square rounded-full overflow-hidden transition-colors"
+                        style={{ border: '1px solid var(--warm-border)' }}
+                      >
                         <Image
                           src={artist.images[0].url}
                           alt={artist.name}
@@ -576,12 +601,12 @@ function SpotifySection() {
                         />
                       </div>
                     )}
-                    <p className="text-xs text-zinc-300 group-hover:text-zinc-50 transition-colors">{artist.name}</p>
+                    <p className="text-xs transition-colors" style={{ color: 'var(--warm-cream-dim)' }}>{artist.name}</p>
                   </Link>
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-zinc-400">No artist data available. Make sure SPOTIFY_ACCESS_TOKEN or SPOTIFY_REFRESH_TOKEN is set in your .env.local file.</p>
+              <p className="text-sm" style={{ color: 'var(--warm-muted)' }}>No artist data available. Make sure SPOTIFY_ACCESS_TOKEN or SPOTIFY_REFRESH_TOKEN is set in your .env.local file.</p>
             )
           ) : activeTab === "tracks" ? (
             topTracks.length > 0 ? (
@@ -592,11 +617,15 @@ function SpotifySection() {
                     href={track.external_urls.spotify}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 border-b border-stone-800 pb-4 hover:border-stone-700 group transition-colors"
+                    className="flex items-center gap-4 pb-4 group transition-colors"
+                    style={{ borderBottom: '1px solid var(--warm-border)' }}
                   >
-                    <span className="text-xs text-zinc-500 w-6">{index + 1}</span>
+                    <span className="text-xs w-6" style={{ color: 'var(--warm-muted-dim)' }}>{index + 1}</span>
                     {track.album?.images && track.album.images[0] && (
-                      <div className="relative w-12 h-12 rounded overflow-hidden border border-stone-800 group-hover:border-stone-700 transition-colors">
+                      <div 
+                        className="relative w-12 h-12 rounded overflow-hidden transition-colors"
+                        style={{ border: '1px solid var(--warm-border)' }}
+                      >
                         <Image
                           src={track.album.images[0].url}
                           alt={track.name}
@@ -606,17 +635,17 @@ function SpotifySection() {
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm text-zinc-300 group-hover:text-zinc-50 transition-colors truncate">{track.name}</p>
-                      <p className="text-xs text-zinc-500 truncate">
+                      <p className="text-sm transition-colors truncate" style={{ color: 'var(--warm-cream-dim)' }}>{track.name}</p>
+                      <p className="text-xs truncate" style={{ color: 'var(--warm-muted-dim)' }}>
                         {track.artists.map((a) => a.name).join(", ")}
                       </p>
                     </div>
-                    <ExternalLink className="w-3 h-3 text-zinc-500 group-hover:text-zinc-300 transition-colors flex-shrink-0" />
+                    <ExternalLink className="w-3 h-3 transition-colors flex-shrink-0" style={{ color: 'var(--warm-muted)' }} />
                   </Link>
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-zinc-400">No track data available. Make sure SPOTIFY_ACCESS_TOKEN or SPOTIFY_REFRESH_TOKEN is set in your .env.local file.</p>
+              <p className="text-sm" style={{ color: 'var(--warm-muted)' }}>No track data available. Make sure SPOTIFY_ACCESS_TOKEN or SPOTIFY_REFRESH_TOKEN is set in your .env.local file.</p>
             )
           ) : (
             audiobooks.length > 0 ? (
@@ -627,11 +656,15 @@ function SpotifySection() {
                     href={book.external_urls.spotify}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 border-b border-stone-800 pb-4 hover:border-stone-700 group transition-colors"
+                    className="flex items-center gap-4 pb-4 group transition-colors"
+                    style={{ borderBottom: '1px solid var(--warm-border)' }}
                   >
-                    <span className="text-xs text-zinc-500 w-6">{index + 1}</span>
+                    <span className="text-xs w-6" style={{ color: 'var(--warm-muted-dim)' }}>{index + 1}</span>
                     {book.images && book.images[0] && (
-                      <div className="relative w-12 h-12 rounded overflow-hidden border border-stone-800 group-hover:border-stone-700 transition-colors">
+                      <div 
+                        className="relative w-12 h-12 rounded overflow-hidden transition-colors"
+                        style={{ border: '1px solid var(--warm-border)' }}
+                      >
                         <Image
                           src={book.images[0].url}
                           alt={book.name}
@@ -641,17 +674,17 @@ function SpotifySection() {
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm text-zinc-300 group-hover:text-zinc-50 transition-colors truncate">{book.name}</p>
-                      <p className="text-xs text-zinc-500 truncate">
+                      <p className="text-sm transition-colors truncate" style={{ color: 'var(--warm-cream-dim)' }}>{book.name}</p>
+                      <p className="text-xs truncate" style={{ color: 'var(--warm-muted-dim)' }}>
                         {book.authors.map((a) => a.name).join(", ")}
                       </p>
                     </div>
-                    <ExternalLink className="w-3 h-3 text-zinc-500 group-hover:text-zinc-300 transition-colors flex-shrink-0" />
+                    <ExternalLink className="w-3 h-3 transition-colors flex-shrink-0" style={{ color: 'var(--warm-muted)' }} />
                   </Link>
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-zinc-400">No audiobook data available.</p>
+              <p className="text-sm" style={{ color: 'var(--warm-muted)' }}>No audiobook data available.</p>
             )
           )}
         </div>

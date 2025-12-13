@@ -7,18 +7,18 @@ import { useCallback, useEffect, useRef, useState, useMemo } from "react"
 // Move this outside the component
 
 const FLICKER_COLORS = [
-  "rgba(59, 130, 246,", // Blue
-  "rgba(14, 165, 233,", // Sky Blue
-  "rgba(6, 182, 212,", // Cyan
-  "rgba(34, 211, 238,", // Light Cyan
-  "rgba(139, 92, 246,", // Purple
-  "rgba(168, 85, 247,", // Violet
-  "rgba(79, 70, 229,", // Indigo
-  "rgba(99, 102, 241,", // Blue Indigo
-  "rgba(16, 185, 129,", // Emerald Green
-  "rgba(5, 150, 105,", // Teal
-  "rgba(20, 184, 166,", // Turquoise
-  "rgba(8, 145, 178,", // Dark Cyan
+  "rgba(201, 168, 96,",  // Warm Amber
+  "rgba(212, 168, 75,",  // Gold
+  "rgba(200, 121, 65,",  // Warm Orange
+  "rgba(180, 150, 90,",  // Muted Gold
+  "rgba(139, 154, 107,", // Olive Green
+  "rgba(160, 140, 100,", // Tan
+  "rgba(185, 165, 120,", // Light Bronze
+  "rgba(150, 130, 90,",  // Dark Gold
+  "rgba(170, 145, 100,", // Caramel
+  "rgba(145, 160, 110,", // Sage
+  "rgba(190, 155, 95,",  // Honey
+  "rgba(175, 140, 85,",  // Copper
 ]
 
 interface FlickeringGridProps {
