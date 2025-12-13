@@ -3,13 +3,12 @@ import { NextResponse } from 'next/server'
 const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID || '10fdb1f3181f498e952d0a72ec2cde2a'
 const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET || '036942167f54452d93b4c73240129b22'
 
+// Use consistent redirect URI - must match exactly what's in Spotify dashboard
+const REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI || 'https://www.norfleet.tech/api/spotify/auth/callback'
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const action = searchParams.get('action')
-  
-  // Dynamically determine redirect URI based on current request
-  const url = new URL(request.url)
-  const REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI || `${url.protocol}//${url.host}/api/spotify/auth/callback`
 
   if (action === 'authorize') {
     // Redirect to Spotify authorization

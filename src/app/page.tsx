@@ -48,72 +48,35 @@ export default function Page() {
 
       <main className={cn(containerClass, "pt-24 md:pt-32 pb-16 relative z-10")}>
         {/* About Section */}
-        <section id="about" className="pt-4 md:pt-8 pb-4 md:pb-8 scroll-mt-24">
-          <div className="space-y-4 md:space-y-8">
-            <div>
-              <div className="flex items-start justify-between gap-4 md:gap-8">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-2 flex-wrap">
-                    <h1 className="text-2xl md:text-4xl font-light tracking-tight" style={{ color: 'var(--warm-cream)' }}>
-                      <span className="font-semibold">Cameron Norfleet</span>
-                    </h1>
-                    <Link
-                      href="https://x.com/camfleety"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs md:text-sm transition-colors whitespace-nowrap px-2 py-0.5 rounded"
-                      style={{ 
-                        color: 'var(--warm-orange)', 
-                        backgroundColor: 'rgba(200, 121, 65, 0.15)',
-                        border: '1px solid rgba(200, 121, 65, 0.3)'
-                      }}
-                    >
-                      @camfleety
-                    </Link>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2 md:gap-4 text-xs md:text-sm" style={{ color: 'var(--warm-muted)' }}>
-                    <span className="whitespace-nowrap">Followers: 1.2k</span>
-                    <span className="hidden md:inline" style={{ color: 'var(--warm-muted-dim)' }}>•</span>
-                    <span className="md:hidden" style={{ color: 'var(--warm-muted-dim)' }}>•</span>
-                    <span className="whitespace-nowrap">Age: 26</span>
-                    <span className="hidden md:inline" style={{ color: 'var(--warm-muted-dim)' }}>•</span>
-                    <span className="md:hidden" style={{ color: 'var(--warm-muted-dim)' }}>•</span>
-                    <span className="whitespace-nowrap">Hometown: Berkeley, CA</span>
-                  </div>
-                </div>
-              </div>
-              <div className="pb-2 mt-4" style={{ borderBottom: '1px solid var(--warm-border)' }}></div>
+        <section id="about" className="pb-6 scroll-mt-24">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-4 mb-3 flex-wrap">
+              <h1 className="text-3xl md:text-5xl font-semibold tracking-tight" style={{ color: 'var(--warm-cream)' }}>
+                Cameron Norfleet
+              </h1>
+              <Link
+                href="https://x.com/camfleety"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm transition-colors px-3 py-1 rounded"
+                style={{ 
+                  color: 'var(--warm-orange)', 
+                  backgroundColor: 'rgba(200, 121, 65, 0.15)',
+                  border: '1px solid rgba(200, 121, 65, 0.3)'
+                }}
+              >
+                @camfleety
+              </Link>
             </div>
             
-            <div className="space-y-4 md:space-y-6 text-sm" style={{ color: 'var(--warm-muted)' }}>
-              <div className="flex flex-col md:flex-row md:gap-12 gap-4">
-                <div className="flex flex-col gap-1">
-                  <span className="text-xs md:text-sm" style={{ color: 'var(--warm-muted-dim)' }}>Occupation</span>
-                  <span className="text-sm md:text-base whitespace-nowrap" style={{ color: 'var(--warm-cream-dim)' }}>Agent Engineer, Amigo</span>
-                </div>
-                
-                <div className="hidden md:block w-px h-4 self-center" style={{ backgroundColor: 'var(--warm-border)' }}></div>
-                <div className="md:hidden -mx-4" style={{ borderBottom: '1px solid var(--warm-border)' }}></div>
-                
-                <div className="flex flex-col gap-1">
-                  <span className="text-xs md:text-sm" style={{ color: 'var(--warm-muted-dim)' }}>Location</span>
-                  <span className="text-sm md:text-base whitespace-nowrap" style={{ color: 'var(--warm-cream-dim)' }}>Brooklyn, New York</span>
-                </div>
-                
-                <div className="hidden md:block w-px h-4 self-center" style={{ backgroundColor: 'var(--warm-border)' }}></div>
-                <div className="md:hidden -mx-4" style={{ borderBottom: '1px solid var(--warm-border)' }}></div>
-                
-                <div className="flex flex-col gap-1">
-                  <span className="text-xs md:text-sm" style={{ color: 'var(--warm-muted-dim)' }}>Education</span>
-                  <span className="text-sm md:text-base break-words" style={{ color: 'var(--warm-cream-dim)' }}>Information System & Data Analytics, San Jose State University</span>
-                </div>
-              </div>
-            </div>
+            <p className="text-base md:text-lg" style={{ color: 'var(--warm-muted)' }}>
+              Agent Engineer at <span style={{ color: 'var(--warm-cream-dim)' }}>Amigo</span> · Brooklyn, NY
+            </p>
           </div>
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-8 md:py-16 scroll-mt-24">
+        <section id="projects" className="py-6 scroll-mt-24">
           <ProjectsCarousel />
         </section>
 
@@ -356,10 +319,8 @@ function ProjectsCarousel() {
   }
 
   return (
-    <div className="space-y-12">
-      <div className="pb-2" style={{ borderBottom: '1px solid var(--warm-border)' }}>
-        <h2 className="uppercase font-bold tracking-widest text-sm" style={{ color: 'var(--warm-cream)' }}>Projects</h2>
-      </div>
+    <div className="space-y-8">
+      <h2 className="uppercase font-bold tracking-widest text-sm" style={{ color: 'var(--warm-cream)' }}>Projects</h2>
 
       <div className="relative">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 md:gap-x-12 gap-y-8 md:gap-y-16">
@@ -542,12 +503,10 @@ function SpotifySection() {
   }, [])
 
   return (
-    <div className="space-y-12">
-      <div className="pb-2" style={{ borderBottom: '1px solid var(--warm-border)' }}>
-        <h2 className="uppercase font-bold tracking-widest text-sm" style={{ color: 'var(--warm-cream)' }}>Spotify</h2>
-      </div>
+    <div className="space-y-8">
+      <h2 className="uppercase font-bold tracking-widest text-sm" style={{ color: 'var(--warm-cream)' }}>Spotify</h2>
 
-      <div className="flex gap-4 mb-8">
+      <div className="flex gap-4 mb-6">
         <button
           onClick={() => setActiveTab("artists")}
           className="text-xs uppercase tracking-widest transition-colors"
