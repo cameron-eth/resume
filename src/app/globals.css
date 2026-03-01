@@ -10,26 +10,26 @@ body {
 
 @layer base {
   :root {
-    /* Warm Cursor-inspired palette */
-    --background: 30 12% 7%;
-    --foreground: 40 20% 90%;
-    --card: 30 10% 10%;
-    --card-foreground: 40 20% 90%;
-    --popover: 30 10% 10%;
-    --popover-foreground: 40 20% 90%;
-    --primary: 40 20% 90%;
-    --primary-foreground: 30 12% 7%;
-    --secondary: 30 8% 15%;
-    --secondary-foreground: 40 15% 80%;
-    --muted: 30 8% 15%;
-    --muted-foreground: 35 10% 55%;
+    /* Brown + bone palette */
+    --background: 24 28% 11%;
+    --foreground: 34 42% 88%;
+    --card: 24 24% 14%;
+    --card-foreground: 34 42% 88%;
+    --popover: 24 24% 14%;
+    --popover-foreground: 34 42% 88%;
+    --primary: 34 42% 88%;
+    --primary-foreground: 24 28% 11%;
+    --secondary: 24 18% 18%;
+    --secondary-foreground: 34 30% 79%;
+    --muted: 24 18% 18%;
+    --muted-foreground: 30 14% 58%;
     --accent: 38 50% 55%;
     --accent-foreground: 30 12% 7%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 40 20% 90%;
-    --border: 30 10% 18%;
-    --input: 30 10% 18%;
-    --ring: 38 50% 55%;
+    --border: 24 16% 24%;
+    --input: 24 16% 24%;
+    --ring: 30 34% 62%;
     --chart-1: 38 70% 50%;
     --chart-2: 45 60% 45%;
     --chart-3: 30 50% 40%;
@@ -38,18 +38,20 @@ body {
     --radius: 0.5rem;
     
     /* Custom warm colors */
-    --warm-bg: #0f0d0b;
-    --warm-bg-elevated: #1a1714;
-    --warm-cream: #e8e2d6;
-    --warm-cream-dim: #c9c2b5;
-    --warm-muted: #8a847a;
-    --warm-muted-dim: #5c5750;
-    --warm-border: #2d2824;
-    --warm-border-hover: #3d3530;
-    --warm-amber: #c9a860;
-    --warm-olive: #8b9a6b;
-    --warm-gold: #d4a84b;
-    --warm-orange: #c87941;
+    --warm-bg: #1a120d;
+    --warm-bg-elevated: #251a13;
+    --warm-bone: #d9c8ad;
+    --warm-bone-bright: #f3e8d6;
+    --warm-cream: #e7d8c1;
+    --warm-cream-dim: #cdb99b;
+    --warm-muted: #a2876a;
+    --warm-muted-dim: #80654d;
+    --warm-border: #3f2f23;
+    --warm-border-hover: #58412f;
+    --warm-amber: #c89b61;
+    --warm-olive: #8e7e61;
+    --warm-gold: #caa56b;
+    --warm-orange: #bf7a42;
   }
 }
 
@@ -59,12 +61,18 @@ body {
   }
   html {
     scroll-behavior: smooth;
+    background-color: var(--warm-bg);
+    height: 100%;
   }
   body {
     background-color: var(--warm-bg);
     color: var(--warm-cream);
+    min-height: 100%;
+    height: 100%;
   }
-  html {
+  #__next,
+  [data-nextjs-scroll-focus-boundary] {
     background-color: var(--warm-bg);
+    min-height: 100%;
   }
 }

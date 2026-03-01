@@ -1,653 +1,171 @@
 "use client"
 
-import type React from "react"
-
-import { useState, useEffect } from "react"
 import Link from "next/link"
-import Image from "next/image"
-import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { FlickeringGrid } from "@/components/FlickeringGrid"
+import { useState, useEffect } from "react"
 
-export default function Page() {
-  const [activeSection, setActiveSection] = useState("about")
-
-  const containerClass = "max-w-6xl mx-auto px-4 md:px-12"
-
-  return (
-    <div className="min-h-screen font-sans relative" style={{ backgroundColor: 'var(--warm-bg)', color: 'var(--warm-cream)' }}>
-      {/* Flickering Grid Background */}
-      <div className="fixed inset-0 z-0 opacity-25">
-        <FlickeringGrid squareSize={3} gridGap={4} flickerChance={0.2} maxOpacity={0.2} />
-      </div>
-      
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50" style={{ backgroundColor: 'var(--warm-bg)', borderBottom: '1px solid var(--warm-border)' }}>
-        <div className={cn(containerClass, "py-6 flex justify-between items-center")}>
-          <Link href="/" className="uppercase tracking-widest text-sm font-medium transition-colors" style={{ color: 'var(--warm-cream)' }}>
-            Cameron
-          </Link>
-
-          <div className="hidden md:flex items-center gap-8 uppercase text-xs tracking-widest">
-            <NavLink href="#about" active={activeSection === "about"} onClick={() => setActiveSection("about")}>
-              About
-            </NavLink>
-            <NavLink
-              href="#projects"
-              active={activeSection === "projects"}
-              onClick={() => setActiveSection("projects")}
-            >
-              Projects
-            </NavLink>
-            <NavLink href="#spotify" active={activeSection === "spotify"} onClick={() => setActiveSection("spotify")}>
-              Spotify
-            </NavLink>
-          </div>
-        </div>
-      </nav>
-
-      <main className={cn(containerClass, "pt-24 md:pt-32 pb-16 relative z-10")}>
-        {/* About Section */}
-        <section id="about" className="pb-6 scroll-mt-24">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-4 mb-3 flex-wrap">
-              <h1 className="text-3xl md:text-5xl font-semibold tracking-tight" style={{ color: 'var(--warm-cream)' }}>
-                Cameron Norfleet
-              </h1>
-              <Link
-                href="https://x.com/camfleety"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm transition-colors px-3 py-1 rounded"
-                style={{ 
-                  color: 'var(--warm-orange)', 
-                  backgroundColor: 'rgba(200, 121, 65, 0.15)',
-                  border: '1px solid rgba(200, 121, 65, 0.3)'
-                }}
-              >
-                @camfleety
-              </Link>
-            </div>
-            
-            <p className="text-base md:text-lg" style={{ color: 'var(--warm-muted)' }}>
-              Agent Engineer at <span style={{ color: 'var(--warm-cream-dim)' }}>Amigo</span> · Brooklyn, NY
-            </p>
-          </div>
-        </section>
-
-        {/* Projects Section */}
-        <section id="projects" className="py-6 scroll-mt-24">
-          <ProjectsCarousel />
-        </section>
-
-        {/* Spotify Section */}
-        <section id="spotify" className="py-8 md:py-16 scroll-mt-24">
-          <SpotifySection />
-        </section>
-      </main>
-
-      <footer className="py-8 md:py-12" style={{ borderTop: '1px solid var(--warm-border)' }}>
-        <div className={containerClass}>
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-8">
-            <p className="text-xs uppercase tracking-widest" style={{ color: 'var(--warm-muted-dim)' }}>© {new Date().getFullYear()} Cameron Norfleet</p>
-            
-            <div className="flex flex-col md:flex-row gap-4 md:gap-8">
-              <div className="flex items-center gap-2">
-                <p className="text-xs uppercase tracking-widest" style={{ color: 'var(--warm-muted-dim)' }}>Email</p>
-                <Link href="mailto:camfleety@gmail.com" className="text-xs hover:underline transition-colors" style={{ color: 'var(--warm-cream-dim)' }}>
-                  camfleety@gmail.com
-                </Link>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <p className="text-xs uppercase tracking-widest" style={{ color: 'var(--warm-muted-dim)' }}>LinkedIn</p>
-                <Link
-                  href="https://www.linkedin.com/in/cameron-n-b42885162/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs hover:underline flex items-center gap-1 transition-colors"
-                  style={{ color: 'var(--warm-cream-dim)' }}
-                >
-                  View Profile
-                  <ExternalLink className="w-3 h-3" />
-                </Link>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <p className="text-xs uppercase tracking-widest" style={{ color: 'var(--warm-muted-dim)' }}>Twitter</p>
-                <Link
-                  href="https://x.com/camfleety"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs hover:underline flex items-center gap-1 transition-colors"
-                  style={{ color: 'var(--warm-cream-dim)' }}
-                >
-                  @camfleety
-                  <ExternalLink className="w-3 h-3" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  )
+type ProjectBlogItem = {
+  year: string
+  projectName: string
+  projectUrl: string
+  blogTitle: string
+  blogUrl: string
+  value: string
+  subjects: string[]
 }
 
-// Component for navigation links
-function NavLink({
-  href,
-  active,
-  onClick,
-  children,
-}: {
-  href: string
-  active: boolean
-  onClick: () => void
-  children: React.ReactNode
-}) {
-  return (
-    <Link
-      href={href}
-      className="transition-colors"
-      style={{ color: active ? 'var(--warm-cream)' : 'var(--warm-muted)', }}
-      onClick={onClick}
-    >
-      {children}
-    </Link>
-  )
-}
-
-// Component for category tags
-function CategoryTag({ name, color }: { name: string; color: "amber" | "olive" | "gold" }) {
-  const colorMap = {
-    amber: { bg: 'rgba(200, 121, 65, 0.15)', text: '#c87941', border: 'rgba(200, 121, 65, 0.3)' },
-    olive: { bg: 'rgba(139, 154, 107, 0.15)', text: '#8b9a6b', border: 'rgba(139, 154, 107, 0.3)' },
-    gold: { bg: 'rgba(201, 168, 96, 0.15)', text: '#c9a860', border: 'rgba(201, 168, 96, 0.3)' },
-  }
-
-  const colors = colorMap[color]
-
-  return (
-    <span 
-      className="px-2 py-0.5 text-[10px] uppercase tracking-wider font-medium"
-      style={{ 
-        backgroundColor: colors.bg, 
-        color: colors.text, 
-        border: `1px solid ${colors.border}` 
-      }}
-    >
-      {name}
-    </span>
-  )
-}
-
-// Component for project cards
-function ProjectCard({
-  title,
-  categories,
-  description,
-  details,
-  link,
-  image,
-}: {
-  title: string
-  categories: Array<{ name: string; color: "amber" | "olive" | "gold" }>
-  description: string
-  details: string
-  link: string
-  image?: string
-}) {
-  return (
-    <div className="group pt-4" style={{ borderTop: '1px solid var(--warm-border)' }}>
-      <div className="flex flex-col">
-        {/* Product Preview Image */}
-        {image && (
-          <div 
-            className="relative w-full h-48 mb-4 rounded-lg overflow-hidden transition-colors"
-            style={{ border: '1px solid var(--warm-border)', backgroundColor: 'var(--warm-bg-elevated)' }}
-          >
-            <Image
-              src={image}
-              alt={`${title} preview`}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
-              onError={(e) => {
-                // Hide image if it doesn't exist
-                e.currentTarget.style.display = 'none'
-              }}
-            />
-          </div>
-        )}
-
-        <div className="flex justify-between items-start">
-          <h3 className="text-sm uppercase tracking-widest" style={{ color: 'var(--warm-cream)' }}>{title}</h3>
-          <Link
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs uppercase tracking-widest hover:underline flex items-center gap-2 transition-colors"
-            style={{ color: 'var(--warm-orange)' }}
-          >
-            View
-            <ExternalLink className="w-3 h-3" />
-          </Link>
-        </div>
-
-        <div className="flex gap-2 mt-2">
-          {categories.map((category, index) => (
-            <CategoryTag key={index} name={category.name} color={category.color} />
-          ))}
-        </div>
-
-        <p className="text-xs mt-4 leading-relaxed" style={{ color: 'var(--warm-muted)' }}>{description}</p>
-        <p className="text-xs mt-4 font-medium" style={{ color: 'var(--warm-orange)' }}>{details}</p>
-      </div>
-    </div>
-  )
-}
-
-// Component for Projects Carousel
-function ProjectsCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  const projects: Array<{
-    title: string
-    categories: Array<{ name: string; color: "amber" | "olive" | "gold" }>
-    description: string
-    details: string
-    link: string
-    image: string
-  }> = [
-    {
-      title: "BETSYNC",
-      categories: [
-        { name: "ENGINEERING", color: "olive" },
-        { name: "PRODUCT", color: "gold" },
-      ],
-      description: "A sports betting platform that syncs with sportsbooks to track bets, provide analytics, and offer insights for bettors.",
-      details: "$2.1k MRR SaaS",
-      link: "https://betsync.us",
-      image: "/betsync-preview.png",
-    },
-    {
-      title: "HIERLOOM AI",
-      categories: [
-        { name: "PRODUCT", color: "gold" },
-        { name: "DESIGN", color: "amber" },
-      ],
-      description: "AI-driven platform for preserving and sharing family stories and memories through interactive digital experiences.",
-      details: "Not Launched",
-      link: "https://kzmnd86rwvzt1kwkjfas.lite.vusercontent.net/",
-      image: "/hierloom-preview.png",
-    },
-    {
-      title: "FIRST BALLOT FF",
-      categories: [
-        { name: "ENGINEERING", color: "olive" },
-        { name: "PRODUCT", color: "gold" },
-      ],
-      description: "Fantasy football platform providing advanced analytics, insights, and tools for competitive fantasy football players.",
-      details: "",
-      link: "https://www.firstballotff.com",
-      image: "/firstballot-preview.png",
-    },
-    {
-      title: "DRAFT THEORY",
-      categories: [
-        { name: "DATA", color: "amber" },
-        { name: "ANALYSIS", color: "gold" },
-        { name: "MODELING", color: "olive" },
-      ],
-      description: "Comprehensive EDA modeling the predictability of the NFL draft with deep analysis surrounding +EV in the NFL's talent market. Advanced analytics using 42 pre-draft features across 2,397 players (2015-2024).",
-      details: "R² = 0.414 • 41.4% Variance Explained",
-      link: "https://v0-draft-theory.vercel.app/",
-      image: "/draft-theory-preview.png",
-    },
-  ]
-
-  const projectsPerPage = 2
-  const totalPages = Math.ceil(projects.length / projectsPerPage)
-  const currentProjects = projects.slice(currentIndex, currentIndex + projectsPerPage)
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + projectsPerPage >= projects.length ? 0 : prev + projectsPerPage))
-  }
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - projectsPerPage < 0 ? (totalPages - 1) * projectsPerPage : prev - projectsPerPage))
-  }
-
-  return (
-    <div className="space-y-8">
-      <h2 className="uppercase font-bold tracking-widest text-sm" style={{ color: 'var(--warm-cream)' }}>Projects</h2>
-
-      <div className="relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 md:gap-x-12 gap-y-8 md:gap-y-16">
-          {currentProjects.map((project, index) => (
-            <ProjectCard
-              key={`${project.title}-${currentIndex + index}`}
-              title={project.title}
-              categories={project.categories}
-              description={project.description}
-              details={project.details}
-              link={project.link}
-              image={project.image}
-            />
-          ))}
-        </div>
-
-        {totalPages > 1 && (
-          <div className="flex items-center justify-between mt-6 md:mt-8 gap-2">
-            <button
-              onClick={prevSlide}
-              className="flex items-center gap-1 md:gap-2 text-xs uppercase tracking-widest transition-colors"
-              style={{ color: 'var(--warm-muted)' }}
-              aria-label="Previous projects"
-            >
-              <ChevronLeft className="w-3 h-3 md:w-4 md:h-4" />
-              <span className="hidden sm:inline">Previous</span>
-            </button>
-
-            <div className="flex gap-2">
-              {Array.from({ length: totalPages }).map((_, index) => {
-                const pageStartIndex = index * projectsPerPage
-                return (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(pageStartIndex)}
-                    className="w-2 h-2 rounded-full transition-colors"
-                    style={{ 
-                      backgroundColor: currentIndex === pageStartIndex 
-                        ? 'var(--warm-orange)' 
-                        : 'var(--warm-border)' 
-                    }}
-                    aria-label={`Go to page ${index + 1}`}
-                  />
-                )
-              })}
-            </div>
-
-            <button
-              onClick={nextSlide}
-              className="flex items-center gap-1 md:gap-2 text-xs uppercase tracking-widest transition-colors"
-              style={{ color: 'var(--warm-muted)' }}
-              aria-label="Next projects"
-            >
-              <span className="hidden sm:inline">Next</span>
-              <ChevronRight className="w-3 h-3 md:w-4 md:h-4" />
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  )
-}
-
-// Manual tracks list - Update Spotify URLs as needed
-const MANUAL_TRACKS = [
+const projectBlogItems: ProjectBlogItem[] = [
   {
-    name: "Gravity",
-    artists: [{ name: "John Mayer" }],
-    external_urls: { spotify: "https://open.spotify.com/track/4sh2j5lDom6m0nGqgVprwO" },
-    album: { images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }] },
+    year: "2025",
+    projectName: "foundry",
+    projectUrl: "https://foundry-coral-six.vercel.app/",
+    blogTitle: "foundry: giving ai agents the ability to build their own tools at runtime",
+    blogUrl: "/blog/foundry",
+    value: "live",
+    subjects: ["ai agents", "tool generation", "infra", "developer tooling"],
   },
   {
-    name: "Bowie Box",
-    artists: [{ name: "Dominic Fike" }],
-    external_urls: { spotify: "https://open.spotify.com/search/Bowie%20Box%20Dominic%20Fike" },
-    album: { images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }] },
+    year: "2025",
+    projectName: "amigo",
+    projectUrl: "https://amigo.ai",
+    blogTitle: "seven months, one promotion, a million learnings: moving across the country to build ai agents",
+    blogUrl: "/blog/amigo",
+    value: "current",
+    subjects: ["ai agents", "engineering", "product"],
   },
   {
-    name: "Something to Rap About",
-    artists: [{ name: "Freddie Gibbs" }, { name: "Tyler, The Creator" }],
-    external_urls: { spotify: "https://open.spotify.com/track/5uD0Z2of3Im42RG1KykJvY" },
-    album: { images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }] },
+    year: "2024",
+    projectName: "betsync",
+    projectUrl: "https://betsync.us",
+    blogTitle:
+      "building betsync: a 2 year long adventure into statistical modeling, exploring expected value in sports betting, and learning market theory",
+    blogUrl: "/blog/betsync",
+    value: "$2.1k mrr",
+    subjects: ["sports betting", "expected value", "data modeling", "market theory"],
   },
   {
-    name: "How Does It Feel",
-    artists: [{ name: "D'Angelo" }],
-    external_urls: { spotify: "https://open.spotify.com/track/0ixyLzNaPr7G2Fu5ETgssB" },
-    album: { images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }] },
+    year: "2024",
+    projectName: "first ballot ff",
+    projectUrl: "https://www.firstballotff.com",
+    blogTitle: "fantasy football, a hobby that took over all of my freetime. a labor of love, data, predictions, and mostly luck",
+    blogUrl: "/blog/first-ballot-ff",
+    value: "public launch",
+    subjects: ["fantasy football", "data modeling"],
   },
   {
-    name: "News or Something",
-    artists: [{ name: "Isaiah Rashad" }],
-    external_urls: { spotify: "https://open.spotify.com/search/News%20or%20Something%20Isaiah%20Rashad" },
-    album: { images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }] },
-  },
-  {
-    name: "Purple Rain",
-    artists: [{ name: "Prince" }],
-    external_urls: { spotify: "https://open.spotify.com/track/54X78diSLoUDI3joC2bjMz" },
-    album: { images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }] },
-  },
-  {
-    name: "Voyage to Atlantis",
-    artists: [{ name: "The Isley Brothers" }],
-    external_urls: { spotify: "https://open.spotify.com/track/5BW1UgmBKaq9kf5t7gX5wp" },
-    album: { images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }] },
+    year: "2023",
+    projectName: "draft theory",
+    projectUrl: "https://v0-draft-theory.vercel.app/",
+    blogTitle: "draft theory: modeling draft outcomes across 2,397 nfl prospects",
+    blogUrl: "/blog/draft-theory",
+    value: "r² 0.414",
+    subjects: ["data modeling", "nfl draft"],
   },
 ]
 
-// Component for Spotify section
-function SpotifySection() {
-  const [topArtists, setTopArtists] = useState<Array<{ name: string; external_urls: { spotify: string }; images: Array<{ url: string }> }>>([])
-  const [topTracks, setTopTracks] = useState<Array<{ name: string; artists: Array<{ name: string }>; external_urls: { spotify: string }; album: { images: Array<{ url: string }> } }>>([])
-  const [audiobooks, setAudiobooks] = useState<Array<{ name: string; authors: Array<{ name: string }>; external_urls: { spotify: string }; images: Array<{ url: string }> }>>([
-    {
-      name: "On the Edge: The Art of Risking Everything",
-      authors: [{ name: "Nate Silver" }],
-      external_urls: { spotify: "https://open.spotify.com/show/2H57oQFCKiykdfGg97iGDg" },
-      images: [{ url: "https://i.scdn.co/image/ab67616d0000b273e787cffec20aa2a396a61647" }],
-    },
-  ])
-  const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState<"artists" | "tracks" | "audiobooks">("tracks")
+export default function Page() {
+  const [currentTime, setCurrentTime] = useState<string>("")
 
   useEffect(() => {
-    async function fetchSpotifyData() {
-      try {
-        // First search for the audiobook, then fetch it by ID
-        const [artistsRes, tracksRes, audiobookSearchRes] = await Promise.all([
-          fetch("/api/spotify?type=artists&limit=10&time_range=medium_term"),
-          fetch("/api/spotify?type=tracks&limit=5&time_range=medium_term"),
-          fetch("/api/spotify?endpoint=search&q=On%20the%20Edge%20Nate%20Silver&search_type=audiobook&limit=5"),
-        ])
-
-        const artistsData = await artistsRes.json()
-        const tracksData = await tracksRes.json()
-        const audiobookSearchData = await audiobookSearchRes.json()
-
-        if (artistsData.items) {
-          setTopArtists(artistsData.items)
-        }
-        if (tracksData.items) {
-          setTopTracks(tracksData.items)
-        }
-        
-        // Try to find and fetch the audiobook
-        if (audiobookSearchData.audiobooks && audiobookSearchData.audiobooks.items && audiobookSearchData.audiobooks.items.length > 0) {
-          const foundAudiobook = audiobookSearchData.audiobooks.items[0]
-          setAudiobooks([{
-            name: foundAudiobook.name,
-            authors: foundAudiobook.authors || [{ name: "Nate Silver" }],
-            external_urls: foundAudiobook.external_urls || { spotify: "https://open.spotify.com/show/2H57oQFCKiykdfGg97iGDg" },
-            images: foundAudiobook.images || [],
-          }])
-        } else {
-          // Fallback: try fetching by show ID if audiobook search doesn't work
-          try {
-            const showRes = await fetch("/api/spotify?show_id=2H57oQFCKiykdfGg97iGDg")
-            const showData = await showRes.json()
-            if (showData && showData.images && showData.images.length > 0) {
-              setAudiobooks([{
-                name: showData.name || "On the Edge: The Art of Risking Everything",
-                authors: [{ name: "Nate Silver" }],
-                external_urls: showData.external_urls || { spotify: "https://open.spotify.com/show/2H57oQFCKiykdfGg97iGDg" },
-                images: showData.images,
-              }])
-            }
-          } catch (showError) {
-            console.error("Failed to fetch show data:", showError)
-          }
-        }
-      } catch (error) {
-        console.error("Failed to fetch Spotify data:", error)
-      } finally {
-        setLoading(false)
+    const updateTime = () => {
+      const now = new Date()
+      const options: Intl.DateTimeFormatOptions = {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
       }
+      setCurrentTime(now.toLocaleString("en-US", options))
     }
 
-    fetchSpotifyData()
+    updateTime()
+    const interval = setInterval(updateTime, 1000) // Update every second
+
+    return () => clearInterval(interval)
   }, [])
 
   return (
-    <div className="space-y-8">
-      <h2 className="uppercase font-bold tracking-widest text-sm" style={{ color: 'var(--warm-cream)' }}>Spotify</h2>
+    <div className="min-h-screen h-full bg-[var(--warm-bg)] text-[var(--warm-cream)]">
+      <div className="mx-auto w-full max-w-5xl px-6 pb-16 pt-10 md:px-10 md:pt-12">
+        <header className="mb-8 flex items-start justify-between md:mb-10">
+          <div>
+            <h1 className="text-xl font-semibold tracking-tight md:text-2xl">Cameron Norfleet</h1>
+            {currentTime && (
+              <p className="mt-1 text-[9px] tracking-[0.12em] text-[var(--warm-muted)] md:text-[10px]">
+                {currentTime}
+              </p>
+            )}
+          </div>
 
-      <div className="flex gap-4 mb-6">
-        <button
-          onClick={() => setActiveTab("artists")}
-          className="text-xs uppercase tracking-widest transition-colors"
-          style={{ color: activeTab === "artists" ? 'var(--warm-cream)' : 'var(--warm-muted)' }}
-        >
-          Top Artists
-        </button>
-        <div className="w-px h-4 self-center" style={{ backgroundColor: 'var(--warm-border)' }}></div>
-        <button
-          onClick={() => setActiveTab("tracks")}
-          className="text-xs uppercase tracking-widest transition-colors"
-          style={{ color: activeTab === "tracks" ? 'var(--warm-cream)' : 'var(--warm-muted)' }}
-        >
-          Top Tracks
-        </button>
-        <div className="w-px h-4 self-center" style={{ backgroundColor: 'var(--warm-border)' }}></div>
-        <button
-          onClick={() => setActiveTab("audiobooks")}
-          className="text-xs uppercase tracking-widest transition-colors"
-          style={{ color: activeTab === "audiobooks" ? 'var(--warm-cream)' : 'var(--warm-muted)' }}
-        >
-          Audiobooks
-        </button>
+          <nav className="flex items-center gap-4 pt-1 md:gap-5">
+            <Link
+              href="#blog"
+              className="text-[9px] tracking-[0.12em] text-[var(--warm-cream)] transition-colors hover:text-[var(--warm-bone-bright)] md:text-[10px]"
+            >
+              Blog
+            </Link>
+            <Link
+              href="http://cal.com/camfleety/30min?user=camfleety&month=2026-03"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[9px] tracking-[0.12em] text-[var(--warm-cream)] transition-colors hover:text-[var(--warm-bone-bright)] md:text-[10px]"
+            >
+              Contact
+            </Link>
+            <Link
+              href="https://x.com/camfleety"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[9px] tracking-[0.12em] text-[var(--warm-cream)] transition-colors hover:text-[var(--warm-bone-bright)] md:text-[10px]"
+            >
+              Follow me
+            </Link>
+          </nav>
+        </header>
+
+        <main id="blog">
+          <div>
+            {projectBlogItems.map((item) => {
+              const isExternalBlogLink = item.blogUrl.startsWith("http")
+
+              return (
+                <article
+                  key={`${item.year}-${item.projectName}`}
+                  className="grid grid-cols-[56px_1fr_auto] gap-3 py-5 md:grid-cols-[72px_1fr_100px] md:gap-5"
+                >
+                  <span className="pt-1 text-[10px] text-[var(--warm-muted)] md:text-[11px]">{item.year}</span>
+                  <div className="space-y-1.5">
+                    <Link
+                      href={item.blogUrl}
+                      target={isExternalBlogLink ? "_blank" : undefined}
+                      rel={isExternalBlogLink ? "noopener noreferrer" : undefined}
+                      className="font-[ui-serif,Georgia,Cambria,Times_New_Roman,Times,serif] text-[1.1rem] leading-[1.2] text-[var(--warm-bone)] transition-colors hover:text-[var(--warm-bone-bright)] md:text-[1.45rem]"
+                    >
+                      {item.blogTitle}
+                    </Link>
+                    <div className="flex flex-wrap gap-1.5">
+                      {item.subjects.map((subject, idx) => (
+                        <Link
+                          key={idx}
+                          href={item.projectUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-block px-2 py-0.5 text-[8px] tracking-[0.08em] text-[var(--warm-cream-dim)] border border-[var(--warm-border)] rounded-sm transition-colors hover:text-[var(--warm-bone-bright)] hover:border-[var(--warm-border-hover)] md:text-[9px]"
+                        >
+                          {subject}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                  <span className="pt-1 text-right text-[10px] tabular-nums text-[var(--warm-muted)] md:text-[11px]">{item.value}</span>
+                </article>
+              )
+            })}
+          </div>
+        </main>
       </div>
-
-      {loading ? (
-        <p className="text-sm" style={{ color: 'var(--warm-muted)' }}>Loading...</p>
-      ) : (
-        <div className="space-y-4">
-          {activeTab === "artists" ? (
-            topArtists.length > 0 ? (
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                {topArtists.map((artist, index) => (
-                  <Link
-                    key={index}
-                    href={artist.external_urls.spotify}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col items-center text-center space-y-2 hover:opacity-80 transition-opacity"
-                  >
-                    {artist.images && artist.images[0] && (
-                      <div 
-                        className="relative w-full aspect-square rounded-full overflow-hidden transition-colors"
-                        style={{ border: '1px solid var(--warm-border)' }}
-                      >
-                        <Image
-                          src={artist.images[0].url}
-                          alt={artist.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    )}
-                    <p className="text-xs transition-colors" style={{ color: 'var(--warm-cream-dim)' }}>{artist.name}</p>
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm" style={{ color: 'var(--warm-muted)' }}>No artist data available. Make sure SPOTIFY_ACCESS_TOKEN or SPOTIFY_REFRESH_TOKEN is set in your .env.local file.</p>
-            )
-          ) : activeTab === "tracks" ? (
-            topTracks.length > 0 ? (
-              <div className="space-y-2">
-                {topTracks.map((track, index) => (
-                  <Link
-                    key={index}
-                    href={track.external_urls.spotify}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 pb-4 group transition-colors"
-                    style={{ borderBottom: '1px solid var(--warm-border)' }}
-                  >
-                    <span className="text-xs w-6" style={{ color: 'var(--warm-muted-dim)' }}>{index + 1}</span>
-                    {track.album?.images && track.album.images[0] && (
-                      <div 
-                        className="relative w-12 h-12 rounded overflow-hidden transition-colors"
-                        style={{ border: '1px solid var(--warm-border)' }}
-                      >
-                        <Image
-                          src={track.album.images[0].url}
-                          alt={track.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    )}
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm transition-colors truncate" style={{ color: 'var(--warm-cream-dim)' }}>{track.name}</p>
-                      <p className="text-xs truncate" style={{ color: 'var(--warm-muted-dim)' }}>
-                        {track.artists.map((a) => a.name).join(", ")}
-                      </p>
-                    </div>
-                    <ExternalLink className="w-3 h-3 transition-colors flex-shrink-0" style={{ color: 'var(--warm-muted)' }} />
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm" style={{ color: 'var(--warm-muted)' }}>No track data available. Make sure SPOTIFY_ACCESS_TOKEN or SPOTIFY_REFRESH_TOKEN is set in your .env.local file.</p>
-            )
-          ) : (
-            audiobooks.length > 0 ? (
-              <div className="space-y-2">
-                {audiobooks.map((book, index) => (
-                  <Link
-                    key={index}
-                    href={book.external_urls.spotify}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 pb-4 group transition-colors"
-                    style={{ borderBottom: '1px solid var(--warm-border)' }}
-                  >
-                    <span className="text-xs w-6" style={{ color: 'var(--warm-muted-dim)' }}>{index + 1}</span>
-                    {book.images && book.images[0] && (
-                      <div 
-                        className="relative w-12 h-12 rounded overflow-hidden transition-colors"
-                        style={{ border: '1px solid var(--warm-border)' }}
-                      >
-                        <Image
-                          src={book.images[0].url}
-                          alt={book.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    )}
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm transition-colors truncate" style={{ color: 'var(--warm-cream-dim)' }}>{book.name}</p>
-                      <p className="text-xs truncate" style={{ color: 'var(--warm-muted-dim)' }}>
-                        {book.authors.map((a) => a.name).join(", ")}
-                      </p>
-                    </div>
-                    <ExternalLink className="w-3 h-3 transition-colors flex-shrink-0" style={{ color: 'var(--warm-muted)' }} />
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm" style={{ color: 'var(--warm-muted)' }}>No audiobook data available.</p>
-            )
-          )}
-        </div>
-      )}
     </div>
   )
 }
