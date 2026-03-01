@@ -133,7 +133,7 @@ export default function Page() {
               return (
                 <article
                   key={`${item.year}-${item.projectName}`}
-                  className="grid grid-cols-[56px_1fr_auto] gap-3 py-5 md:grid-cols-[72px_1fr_100px] md:gap-5"
+                  className="grid grid-cols-[48px_1fr] gap-2 py-4 md:grid-cols-[72px_1fr_100px] md:gap-5 md:py-5"
                 >
                   <span className="pt-1 text-[10px] text-[var(--warm-muted)] md:text-[11px]">{item.year}</span>
                   <div className="space-y-1.5">
@@ -141,7 +141,7 @@ export default function Page() {
                       href={item.blogUrl}
                       target={isExternalBlogLink ? "_blank" : undefined}
                       rel={isExternalBlogLink ? "noopener noreferrer" : undefined}
-                      className="font-[ui-serif,Georgia,Cambria,Times_New_Roman,Times,serif] text-[1.1rem] leading-[1.2] text-[var(--warm-bone)] transition-colors hover:text-[var(--warm-bone-bright)] md:text-[1.45rem]"
+                      className="font-[ui-serif,Georgia,Cambria,Times_New_Roman,Times,serif] text-[1rem] leading-[1.25] text-[var(--warm-bone)] transition-colors hover:text-[var(--warm-bone-bright)] md:text-[1.45rem] md:leading-[1.2]"
                     >
                       {item.blogTitle}
                     </Link>
@@ -158,8 +158,11 @@ export default function Page() {
                         </Link>
                       ))}
                     </div>
+                    {/* value badge: visible only on mobile, below the tags */}
+                    <p className="text-[9px] tabular-nums text-[var(--warm-muted)] md:hidden">{item.value}</p>
                   </div>
-                  <span className="pt-1 text-right text-[10px] tabular-nums text-[var(--warm-muted)] md:text-[11px]">{item.value}</span>
+                  {/* value column: visible only on desktop */}
+                  <span className="hidden pt-1 text-right text-[11px] tabular-nums text-[var(--warm-muted)] md:block">{item.value}</span>
                 </article>
               )
             })}
