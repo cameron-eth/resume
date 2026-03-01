@@ -145,7 +145,7 @@ export default function Page() {
                     >
                       {item.blogTitle}
                     </Link>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="hidden flex-wrap gap-1.5 md:flex">
                       {item.subjects.map((subject, idx) => (
                         <Link
                           key={idx}
