@@ -33,11 +33,11 @@ export default function DraftTheoryBlogPage() {
               these players did not just beat expectations. they blew past the price implied by where they were picked.
             </p>
             <ul className="space-y-3 text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
-              <li>tyreek hill (r5 p165): +259.0 surplus | ev 147.4 -> actual 406.4</li>
-              <li>budda baker (r2 p36): +173.8 surplus | ev 110.0 -> actual 283.8</li>
-              <li>t.j. watt (r1 p30): +168.2 surplus | ev 107.0 -> actual 275.2</li>
-              <li>dak prescott (r4 p135): +161.6 surplus | ev 7.2 -> actual 168.8</li>
-              <li>chris jones (r2 p37): +156.4 surplus | ev 42.1 -> actual 198.5</li>
+              <li>tyreek hill (r5 p165): +259.0 surplus | ev 147.4 → actual 406.4</li>
+              <li>budda baker (r2 p36): +173.8 surplus | ev 110.0 → actual 283.8</li>
+              <li>t.j. watt (r1 p30): +168.2 surplus | ev 107.0 → actual 275.2</li>
+              <li>dak prescott (r4 p135): +161.6 surplus | ev 7.2 → actual 168.8</li>
+              <li>chris jones (r2 p37): +156.4 surplus | ev 42.1 → actual 198.5</li>
             </ul>
           </section>
 
@@ -83,8 +83,8 @@ export default function DraftTheoryBlogPage() {
               these are the picks where draft cost and on-field return were the most out of balance.
             </p>
             <ul className="space-y-1 text-[11px] text-[var(--warm-cream-dim)] md:text-[13px]">
-              <li>eli apple (r1 p10): -76.8 surplus | ev 142.6 -> actual 65.8</li>
-              <li>ed oliver (r1 p9): -75.8 surplus | ev 164.2 -> actual 88.4</li>
+              <li>eli apple (r1 p10): -76.8 surplus | ev 142.6 → actual 65.8</li>
+              <li>ed oliver (r1 p9): -75.8 surplus | ev 164.2 → actual 88.4</li>
               <li>malik mcdowell (r2 p35): -70.0 surplus | low realized return</li>
             </ul>
           </section>
