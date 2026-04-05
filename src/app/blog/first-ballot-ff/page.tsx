@@ -60,7 +60,7 @@ export default function FirstBallotBlogPage() {
           learnings, and the decision frameworks that held up under pressure.
         </p>
         <Link
-          href="https://www.firstballotff.com"
+              href="https://www.firstballotff.com/"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block text-[10px] tracking-[0.12em] text-[var(--warm-cream)] underline-offset-4 transition-colors hover:text-[var(--warm-bone-bright)] hover:underline md:text-[11px]"

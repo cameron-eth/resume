@@ -42,7 +42,7 @@ export const projectBlogItems: ProjectBlogItem[] = [
   {
     year: "2024",
     projectName: "betsync",
-    projectUrl: "https://betsync.us",
+    projectUrl: "https://www.betsync.us/",
     blogTitle:
       "building betsync: a 2 year long adventure into statistical modeling, exploring expected value in sports betting, and learning market theory",
     blogUrl: "/blog/betsync",
@@ -52,7 +52,7 @@ export const projectBlogItems: ProjectBlogItem[] = [
   {
     year: "2024",
     projectName: "first ballot ff",
-    projectUrl: "https://www.firstballotff.com",
+    projectUrl: "https://www.firstballotff.com/",
     blogTitle:
       "fantasy football, a hobby that took over all of my freetime. a labor of love, data, predictions, and mostly luck",
     blogUrl: "/blog/first-ballot-ff",

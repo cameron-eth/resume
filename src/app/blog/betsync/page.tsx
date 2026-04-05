@@ -80,7 +80,7 @@ export default function BetsyncBlogPage() {
           design, feature engineering, and risk-adjusted decision logic.
         </p>
         <Link
-          href="https://betsync.us"
+              href="https://www.betsync.us/"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block text-[10px] tracking-[0.12em] text-[var(--warm-cream)] underline-offset-4 transition-colors hover:text-[var(--warm-bone-bright)] hover:underline md:text-[11px]"
