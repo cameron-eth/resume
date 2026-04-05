@@ -55,7 +55,8 @@ const projectBlogItems: ProjectBlogItem[] = [
     year: "2023",
     projectName: "draft theory",
     projectUrl: "https://v0-draft-theory.vercel.app/",
-    blogTitle: "draft theory: modeling draft outcomes across 2,397 nfl prospects",
+    blogTitle:
+      "nfl draft theory: a data-driven exploration of the nfl's parity machine (combine, surplus value, and trading back)",
     blogUrl: "/blog/draft-theory",
     value: "r² 0.414",
     subjects: ["data modeling", "nfl draft"],
