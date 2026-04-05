@@ -1,6 +1,6 @@
 # resume
 
-Personal site (Next.js App Router): home timeline + `/blog/*` write-ups.
+Personal site (Next.js App Router): **`/`** projects index, **`/blog`** post list + **`/blog/*`** write-ups.
 
 ## Where to run commands
 
@@ -23,10 +23,12 @@ yarn start
 
 ## Project layout
 
-| Path                                  | Role                                                   |
-| ------------------------------------- | ------------------------------------------------------ |
-| `src/app/page.tsx`                    | Home / blog timeline UI                                |
-| `src/content/projects.ts`             | Timeline data (`projectBlogItems`)                     |
-| `src/app/blog/*/page.tsx`             | Individual posts                                       |
-| `src/components/BlogArticleShell.tsx` | Shared blog chrome (back link, container, `<article>`) |
-| `src/app/api/spotify/`                | Spotify API routes (optional)                          |
+| Path                                  | Role                                                 |
+| ------------------------------------- | ---------------------------------------------------- |
+| `src/app/page.tsx`                    | Home — projects list                                 |
+| `src/app/blog/page.tsx`               | Blog index (timeline)                                |
+| `src/content/projects.ts`             | Shared data (`projectBlogItems`)                     |
+| `src/components/SiteHeader.tsx`       | Shared nav (Projects / Blog / Contact / social)      |
+| `src/app/blog/*/page.tsx`             | Individual posts                                     |
+| `src/components/BlogArticleShell.tsx` | Post chrome (back → `/blog`, container, `<article>`) |
+| `src/app/api/spotify/`                | Spotify API routes (optional)                        |

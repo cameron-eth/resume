@@ -8,7 +8,7 @@ export type ProjectBlogItem = {
   subjects: string[]
 }
 
-/** Homepage blog / project timeline — newest first */
+/** Projects landing + blog index — shared list, newest first */
 export const projectBlogItems: ProjectBlogItem[] = [
   {
     year: "2026",

@@ -9,7 +9,7 @@ export function BlogArticleShell({ children }: { children: ReactNode }) {
     <main className="min-h-screen bg-[var(--warm-bg)] text-[var(--warm-cream)]">
       <div className="mx-auto w-full max-w-3xl px-6 pb-20 pt-10 md:px-10 md:pt-14">
         <div className="mb-8">
-          <Link href="/" className={backLinkClass}>
+          <Link href="/blog" className={backLinkClass}>
             back
           </Link>
         </div>
