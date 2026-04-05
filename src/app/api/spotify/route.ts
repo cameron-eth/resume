@@ -1,24 +1,25 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server"
 
 // Spotify API Configuration
 // Note: As of 2025, Spotify requires redirect URIs to use http://127.0.0.1 instead of http://localhost
 // Make sure your Spotify app's redirect URI is set to: http://127.0.0.1:3000
-const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID || '10fdb1f3181f498e952d0a72ec2cde2a'
-const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET || '036942167f54452d93b4c73240129b22'
-const SPOTIFY_REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN || ''
-const SPOTIFY_ACCESS_TOKEN = process.env.SPOTIFY_ACCESS_TOKEN || '' // Temporary access token for testing
+const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID || "10fdb1f3181f498e952d0a72ec2cde2a"
+const SPOTIFY_CLIENT_SECRET =
+  process.env.SPOTIFY_CLIENT_SECRET || "036942167f54452d93b4c73240129b22"
+const SPOTIFY_REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN || ""
+const SPOTIFY_ACCESS_TOKEN = process.env.SPOTIFY_ACCESS_TOKEN || "" // Temporary access token for testing
 
 async function getAccessToken() {
   // Prioritize refresh token if available (permanent solution)
-  if (SPOTIFY_REFRESH_TOKEN && SPOTIFY_REFRESH_TOKEN.trim() !== '') {
-    const response = await fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
+  if (SPOTIFY_REFRESH_TOKEN && SPOTIFY_REFRESH_TOKEN.trim() !== "") {
+    const response = await fetch("https://accounts.spotify.com/api/token", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: `Basic ${Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64')}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString("base64")}`,
       },
       body: new URLSearchParams({
-        grant_type: 'refresh_token',
+        grant_type: "refresh_token",
         refresh_token: SPOTIFY_REFRESH_TOKEN,
       }),
     })
@@ -31,34 +32,36 @@ async function getAccessToken() {
   }
 
   // Fallback to temporary access token if no refresh token or refresh failed
-  if (SPOTIFY_ACCESS_TOKEN && SPOTIFY_ACCESS_TOKEN.trim() !== '') {
+  if (SPOTIFY_ACCESS_TOKEN && SPOTIFY_ACCESS_TOKEN.trim() !== "") {
     return SPOTIFY_ACCESS_TOKEN
   }
 
-  throw new Error('No valid refresh token or access token provided')
+  throw new Error("No valid refresh token or access token provided")
 }
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
-    const endpoint = searchParams.get('endpoint')
-    const type = searchParams.get('type') || 'artists'
-    const timeRange = searchParams.get('time_range') || 'medium_term'
-    const limit = searchParams.get('limit') || '10'
-    const query = searchParams.get('q') // For search endpoint
+    const endpoint = searchParams.get("endpoint")
+    const type = searchParams.get("type") || "artists"
+    const timeRange = searchParams.get("time_range") || "medium_term"
+    const limit = searchParams.get("limit") || "10"
+    const query = searchParams.get("q") // For search endpoint
     // Use server-side tokens (your Spotify account)
-    if ((!SPOTIFY_REFRESH_TOKEN || SPOTIFY_REFRESH_TOKEN.trim() === '') && 
-        (!SPOTIFY_ACCESS_TOKEN || SPOTIFY_ACCESS_TOKEN.trim() === '')) {
+    if (
+      (!SPOTIFY_REFRESH_TOKEN || SPOTIFY_REFRESH_TOKEN.trim() === "") &&
+      (!SPOTIFY_ACCESS_TOKEN || SPOTIFY_ACCESS_TOKEN.trim() === "")
+    ) {
       return NextResponse.json({ items: [] })
     }
 
     const accessToken = await getAccessToken()
 
     let apiUrl: string
-    const audiobookId = searchParams.get('audiobook_id')
-    const showId = searchParams.get('show_id')
-    const artistId = searchParams.get('artist_id')
-    
+    const audiobookId = searchParams.get("audiobook_id")
+    const showId = searchParams.get("show_id")
+    const artistId = searchParams.get("artist_id")
+
     if (artistId) {
       // Fetch specific artist by ID
       // GET /artists/{id} - returns artist details including followers, genres, images, popularity
@@ -69,9 +72,9 @@ export async function GET(request: Request) {
     } else if (showId) {
       // Fetch specific show/podcast
       apiUrl = `https://api.spotify.com/v1/shows/${showId}`
-    } else if (endpoint === 'search' && query) {
-      const searchType = searchParams.get('search_type') || 'track'
-      const searchLimit = searchParams.get('limit') || '1'
+    } else if (endpoint === "search" && query) {
+      const searchType = searchParams.get("search_type") || "track"
+      const searchLimit = searchParams.get("limit") || "1"
       apiUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=${searchType}&limit=${searchLimit}`
     } else {
       apiUrl = `https://api.spotify.com/v1/me/top/${type}?time_range=${timeRange}&limit=${limit}`
@@ -85,7 +88,7 @@ export async function GET(request: Request) {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}))
-      
+
       // If access token expired, try refreshing
       if (response.status === 401 && SPOTIFY_REFRESH_TOKEN) {
         try {
@@ -100,11 +103,11 @@ export async function GET(request: Request) {
             return NextResponse.json(retryData)
           }
         } catch (retryError) {
-          console.error('Failed to refresh token:', retryError)
+          console.error("Failed to refresh token:", retryError)
         }
       }
-      
-      console.error('Spotify API error:', response.status, errorData)
+
+      console.error("Spotify API error:", response.status, errorData)
       return NextResponse.json({ items: [] })
     }
 
@@ -116,4 +119,3 @@ export async function GET(request: Request) {
     return NextResponse.json({ items: [] })
   }
 }
-

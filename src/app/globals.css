@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap");
 
 body {
-  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    "IBM Plex Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
 }
 
 @layer base {
@@ -36,7 +40,7 @@ body {
     --chart-4: 25 65% 55%;
     --chart-5: 35 75% 60%;
     --radius: 0.5rem;
-    
+
     /* Custom warm colors */
     --warm-bg: #1a120d;
     --warm-bg-elevated: #251a13;

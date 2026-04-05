@@ -1,34 +1,36 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server"
 
-const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID || '10fdb1f3181f498e952d0a72ec2cde2a'
-const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET || '036942167f54452d93b4c73240129b22'
+const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID || "10fdb1f3181f498e952d0a72ec2cde2a"
+const SPOTIFY_CLIENT_SECRET =
+  process.env.SPOTIFY_CLIENT_SECRET || "036942167f54452d93b4c73240129b22"
 
 // Use consistent redirect URI - must match exactly what's in Spotify dashboard
-const REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI || 'https://www.norfleet.tech/api/spotify/auth/callback'
+const REDIRECT_URI =
+  process.env.SPOTIFY_REDIRECT_URI || "https://www.norfleet.tech/api/spotify/auth/callback"
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
-  const code = searchParams.get('code')
-  const error = searchParams.get('error')
+  const code = searchParams.get("code")
+  const error = searchParams.get("error")
 
   if (error) {
     return NextResponse.json({ error }, { status: 400 })
   }
 
   if (!code) {
-    return NextResponse.json({ error: 'No authorization code provided' }, { status: 400 })
+    return NextResponse.json({ error: "No authorization code provided" }, { status: 400 })
   }
 
   try {
     // Exchange code for refresh token
-    const response = await fetch('https://accounts.spotify.com/api/token', {
-      method: 'POST',
+    const response = await fetch("https://accounts.spotify.com/api/token", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: `Basic ${Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64')}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString("base64")}`,
       },
       body: new URLSearchParams({
-        grant_type: 'authorization_code',
+        grant_type: "authorization_code",
         code: code,
         redirect_uri: REDIRECT_URI,
       }),
@@ -36,7 +38,10 @@ export async function GET(request: Request) {
 
     if (!response.ok) {
       const errorData = await response.json()
-      return NextResponse.json({ error: 'Failed to exchange code', details: errorData }, { status: response.status })
+      return NextResponse.json(
+        { error: "Failed to exchange code", details: errorData },
+        { status: response.status }
+      )
     }
 
     const data = await response.json()
@@ -111,11 +116,13 @@ export async function GET(request: Request) {
 
     return new NextResponse(html, {
       headers: {
-        'Content-Type': 'text/html',
+        "Content-Type": "text/html",
       },
     })
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to process authorization', details: String(error) }, { status: 500 })
+    return NextResponse.json(
+      { error: "Failed to process authorization", details: String(error) },
+      { status: 500 }
+    )
   }
 }
-

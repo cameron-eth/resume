@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
 const STORAGE_KEYS = {
-  ACCESS_TOKEN: 'spotify_access_token',
-  REFRESH_TOKEN: 'spotify_refresh_token',
-  EXPIRES_AT: 'spotify_expires_at',
+  ACCESS_TOKEN: "spotify_access_token",
+  REFRESH_TOKEN: "spotify_refresh_token",
+  EXPIRES_AT: "spotify_expires_at",
 }
 
 export interface SpotifyTokens {
@@ -13,20 +13,24 @@ export interface SpotifyTokens {
   token_type: string
 }
 
-export function getStoredTokens(): { access_token: string | null; refresh_token: string | null; expires_at: number | null } {
-  if (typeof window === 'undefined') {
+export function getStoredTokens(): {
+  access_token: string | null
+  refresh_token: string | null
+  expires_at: number | null
+} {
+  if (typeof window === "undefined") {
     return { access_token: null, refresh_token: null, expires_at: null }
   }
 
   return {
     access_token: localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN),
     refresh_token: localStorage.getItem(STORAGE_KEYS.REFRESH_TOKEN),
-    expires_at: parseInt(localStorage.getItem(STORAGE_KEYS.EXPIRES_AT) || '0', 10),
+    expires_at: parseInt(localStorage.getItem(STORAGE_KEYS.EXPIRES_AT) || "0", 10),
   }
 }
 
 export function storeTokens(tokens: SpotifyTokens): void {
-  if (typeof window === 'undefined') return
+  if (typeof window === "undefined") return
 
   localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, tokens.access_token)
   localStorage.setItem(STORAGE_KEYS.REFRESH_TOKEN, tokens.refresh_token)
@@ -35,7 +39,7 @@ export function storeTokens(tokens: SpotifyTokens): void {
 }
 
 export function clearTokens(): void {
-  if (typeof window === 'undefined') return
+  if (typeof window === "undefined") return
 
   localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN)
   localStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN)
@@ -43,10 +47,10 @@ export function clearTokens(): void {
 }
 
 export async function refreshAccessToken(refreshToken: string): Promise<SpotifyTokens> {
-  const response = await fetch('/api/spotify/refresh', {
-    method: 'POST',
+  const response = await fetch("/api/spotify/refresh", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ refresh_token: refreshToken }),
   })
@@ -57,7 +61,7 @@ export async function refreshAccessToken(refreshToken: string): Promise<SpotifyT
   }
 
   const data = await response.json()
-  
+
   // Store the new tokens
   storeTokens({
     access_token: data.access_token,
@@ -85,7 +89,7 @@ export async function getValidAccessToken(): Promise<string | null> {
       const newTokens = await refreshAccessToken(refresh_token)
       return newTokens.access_token
     } catch (error) {
-      console.error('Failed to refresh token:', error)
+      console.error("Failed to refresh token:", error)
       clearTokens()
       return null
     }
@@ -93,4 +97,3 @@ export async function getValidAccessToken(): Promise<string | null> {
 
   return access_token
 }
-
