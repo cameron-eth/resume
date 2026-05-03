@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 import { SiteHeader } from "@/components/SiteHeader"
-import { projectBlogItems } from "@/content/projects"
+import { posts } from "@/content/projects"
 
 export const metadata: Metadata = {
   title: "Blog | Cameron Norfleet",
@@ -20,8 +20,8 @@ export default function BlogIndexPage() {
             Blog
           </h1>
           <div>
-            {projectBlogItems.map((item) => {
-              const isExternalBlogLink = item.blogUrl.startsWith("http")
+            {posts.map((item) => {
+              const isExternalBlogLink = item.href.startsWith("http")
 
               return (
                 <article
@@ -33,12 +33,12 @@ export default function BlogIndexPage() {
                   </span>
                   <div className="space-y-1.5">
                     <Link
-                      href={item.blogUrl}
+                      href={item.href}
                       target={isExternalBlogLink ? "_blank" : undefined}
                       rel={isExternalBlogLink ? "noopener noreferrer" : undefined}
                       className="font-[ui-serif,Georgia,Cambria,Times_New_Roman,Times,serif] text-[1rem] leading-[1.25] text-[var(--warm-bone)] transition-colors hover:text-[var(--warm-bone-bright)] md:text-[1.45rem] md:leading-[1.2]"
                     >
-                      {item.blogTitle}
+                      {item.title}
                     </Link>
                     <div className="hidden flex-wrap gap-1.5 md:flex">
                       {item.subjects.map((subject, idx) => (
