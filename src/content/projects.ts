@@ -24,9 +24,9 @@ export type Post = {
 export const projects: Project[] = [
   {
     year: "2026",
-    name: "walles",
-    url: "https://reel-landing-ten.vercel.app/",
-    subjects: ["ai", "screen recording"],
+    name: "welles",
+    url: "https://welles.studio/",
+    subjects: ["ai editor", "screen recording", "demos"],
     status: "building",
   },
   {
