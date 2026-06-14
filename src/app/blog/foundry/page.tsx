@@ -14,7 +14,7 @@ export default function FoundryBlogPage() {
         </h1>
         <p className="text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
           the ceiling on what ai agents can accomplish is almost always set by the tools available
-          to them. foundry is an attempt to remove that ceiling - a shared, dynamic tooling
+          to them. foundry is an attempt to remove that ceiling, a shared, dynamic tooling
           infrastructure where agents can describe what they need and get production-ready code in
           seconds.
         </p>
@@ -38,7 +38,7 @@ export default function FoundryBlogPage() {
         <p className="text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
           i believe tooling infrastructure is the primary lever for uncapped progress in agentic
           workflows. foundry was built to democratize that infrastructure and give it a shared
-          source of truth - a registry where agents can build tools for themselves, for other
+          source of truth, a registry where agents can build tools for themselves, for other
           agents, and for entire business verticals, then reuse them freely across any context they
           are needed.
         </p>
@@ -50,8 +50,8 @@ export default function FoundryBlogPage() {
         </h2>
         <p className="text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
           when you give an agent the ability to build its own tools, something shifts. decisions
-          that used to require a developer - defining the function signature, writing the logic,
-          deploying and testing it - can now happen inside the agent loop itself. this is not just a
+          that used to require a developer, defining the function signature, writing the logic,
+          deploying and testing it, can now happen inside the agent loop itself. this is not just a
           developer productivity story. it is a fundamentally different model of how software gets
           created.
         </p>
@@ -69,7 +69,7 @@ export default function FoundryBlogPage() {
         </h2>
         <p className="text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
           describe what you need. foundry generates production-ready python, validates it for
-          safety, and deploys it into a fully sandboxed runtime - no network access, no filesystem,
+          safety, and deploys it into a fully sandboxed runtime, no network access, no filesystem,
           no system calls. tools are live in under two seconds, pre-warmed with zero cold starts,
           and billed only for compute time used.
         </p>
@@ -86,12 +86,12 @@ export default function FoundryBlogPage() {
         <p className="text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
           every serious agentic workflow eventually hits the same wall: the agent knows what it
           needs to do but does not have the tool to do it. right now, that is a developer problem.
-          foundry makes it an agent problem - solvable in natural language, instantly.
+          foundry makes it an agent problem, solvable in natural language, instantly.
         </p>
         <p className="text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
           the long-term vision is a shared registry of agent-built tools. an ecosystem where the
-          best solutions to common problems - flagging vitals anomalies, scraping a structured
-          source, formatting a financial report - are built once by an agent, stored, and available
+          best solutions to common problems, flagging vitals anomalies, scraping a structured
+          source, formatting a financial report, are built once by an agent, stored, and available
           to any agent that needs them. a true source of truth for agentic tooling across
           industries.
         </p>
