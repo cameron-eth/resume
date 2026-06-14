@@ -88,7 +88,7 @@ export const posts: Post[] = [
   {
     year: "2025",
     title:
-      "seven months, one promotion, a million learnings: moving across the country to build ai agents",
+      "seven months, a million learnings: moving across the country to build ai agents",
     href: "/blog/amigo",
     projectName: "amigo",
     projectUrl: "https://amigo.ai",
