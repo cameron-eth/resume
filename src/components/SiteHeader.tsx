@@ -83,7 +83,7 @@ export function SiteHeader() {
           href="https://cal.com/camfleety/30min?user=camfleety"
           target="_blank"
           rel="noopener noreferrer"
-          className={navInactive}
+          className={`hidden md:inline ${navInactive}`}
         >
           Contact
         </Link>
