@@ -87,15 +87,6 @@ export const posts: Post[] = [
   },
   {
     year: "2025",
-    title: "foundry: giving ai agents the ability to build their own tools at runtime",
-    href: "/blog/foundry",
-    projectName: "foundry",
-    projectUrl: "https://github.com/cameron-eth/foundry",
-    value: "live",
-    subjects: ["ai agents", "tool generation", "infra", "developer tooling"],
-  },
-  {
-    year: "2025",
     title:
       "seven months, one promotion, a million learnings: moving across the country to build ai agents",
     href: "/blog/amigo",
