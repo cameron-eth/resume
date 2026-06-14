@@ -105,14 +105,4 @@ export const posts: Post[] = [
     value: "$2.1k mrr",
     subjects: ["sports betting", "expected value", "data modeling", "market theory"],
   },
-  {
-    year: "2024",
-    title:
-      "fantasy football, a hobby that took over all of my freetime. a labor of love, data, predictions, and mostly luck",
-    href: "/blog/first-ballot-ff",
-    projectName: "first ballot ff",
-    projectUrl: "https://www.firstballotff.com/",
-    value: "public launch",
-    subjects: ["fantasy football", "data modeling"],
-  },
 ]
