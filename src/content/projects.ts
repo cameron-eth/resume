@@ -31,6 +31,13 @@ export const projects: Project[] = [
   },
   {
     year: "2026",
+    name: "sleeper sdk",
+    url: "https://github.com/cameron-eth/sleeper-sdk",
+    subjects: ["fantasy football", "python sdk", "cli", "data modeling"],
+    status: "open source",
+  },
+  {
+    year: "2024",
     name: "draft theory",
     url: "https://v0-draft-theory.vercel.app/",
     blogSlug: "/blog/draft-theory",

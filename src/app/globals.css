@@ -2,60 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap");
+@font-face {
+  font-family: "CursorGothic";
+  src: url("/fonts/CursorGothic-Regular.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CursorGothic";
+  src: url("/fonts/CursorGothic-Italic.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "CursorGothic";
+  src: url("/fonts/CursorGothic-Bold.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CursorGothic";
+  src: url("/fonts/CursorGothic-BoldItalic.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 700;
+  font-style: italic;
+}
 
 body {
   font-family:
-    "IBM Plex Sans",
+    "CursorGothic",
     -apple-system,
     BlinkMacSystemFont,
     sans-serif;
 }
 
 @layer base {
+  /* ── Light mode (default) ── */
   :root {
-    /* Brown + bone palette */
-    --background: 24 28% 11%;
-    --foreground: 34 42% 88%;
-    --card: 24 24% 14%;
-    --card-foreground: 34 42% 88%;
-    --popover: 24 24% 14%;
-    --popover-foreground: 34 42% 88%;
-    --primary: 34 42% 88%;
-    --primary-foreground: 24 28% 11%;
-    --secondary: 24 18% 18%;
-    --secondary-foreground: 34 30% 79%;
-    --muted: 24 18% 18%;
-    --muted-foreground: 30 14% 58%;
-    --accent: 38 50% 55%;
-    --accent-foreground: 30 12% 7%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 40 20% 90%;
-    --border: 24 16% 24%;
-    --input: 24 16% 24%;
-    --ring: 30 34% 62%;
-    --chart-1: 38 70% 50%;
-    --chart-2: 45 60% 45%;
-    --chart-3: 30 50% 40%;
-    --chart-4: 25 65% 55%;
-    --chart-5: 35 75% 60%;
-    --radius: 0.5rem;
+    --warm-bg: #f7f7f4;
+    --warm-bg-elevated: #f0efea;
+    --warm-card-02: #ebeae5;
+    --warm-card-03: #e6e5e0;
+    --warm-card-04: #e1e0db;
+    --warm-bone: #26251e;
+    --warm-bone-bright: #f54e00;
+    --warm-cream: #3b3a33;
+    --warm-cream-dim: #23221e;
+    --warm-muted: #918f88;
+    --warm-muted-dim: #b8b6af;
+    --warm-border: #e1e0db;
+    --warm-border-hover: #cccbc5;
+    --warm-pill: #ebeae5;
+    --warm-amber: #f54e00;
+    --warm-olive: #5c5a54;
+    --warm-gold: #f54e00;
+    --warm-orange: #f54e00;
 
-    /* Custom warm colors */
-    --warm-bg: #1a120d;
-    --warm-bg-elevated: #251a13;
-    --warm-bone: #d9c8ad;
-    --warm-bone-bright: #f3e8d6;
-    --warm-cream: #e7d8c1;
-    --warm-cream-dim: #cdb99b;
-    --warm-muted: #a2876a;
-    --warm-muted-dim: #80654d;
-    --warm-border: #3f2f23;
-    --warm-border-hover: #58412f;
-    --warm-amber: #c89b61;
-    --warm-olive: #8e7e61;
-    --warm-gold: #caa56b;
-    --warm-orange: #bf7a42;
+    --background: 60 14% 96%;
+    --foreground: 50 14% 13%;
+    --border: 55 10% 87%;
+    --ring: 17 100% 48%;
+    --radius: 0.5rem;
+  }
+
+  /* ── Dark mode ── */
+  .dark {
+    --warm-bg: #14120b;
+    --warm-bg-elevated: #1b1913;
+    --warm-card-02: #201e18;
+    --warm-card-03: #26241e;
+    --warm-card-04: #2b2923;
+    --warm-bone: #edecec;
+    --warm-bone-bright: #f54e00;
+    --warm-cream: #d7d6d5;
+    --warm-cream-dim: #969592;
+    --warm-muted: #6b6966;
+    --warm-muted-dim: #4a4845;
+    --warm-border: #2b2923;
+    --warm-border-hover: #3a3730;
+    --warm-pill: #201e18;
+    --warm-amber: #f54e00;
+    --warm-olive: #969592;
+    --warm-gold: #f54e00;
+    --warm-orange: #f54e00;
+
+    --background: 45 20% 7%;
+    --foreground: 60 5% 93%;
+    --border: 45 12% 16%;
+    --ring: 17 100% 48%;
   }
 }
 

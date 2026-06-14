@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Github } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
+import { useTheme } from "next-themes"
 
 const GITHUB_URL = "https://github.com/cameron-eth"
 const X_URL = "https://x.com/camfleety"
@@ -26,7 +27,7 @@ const navActive =
   "text-[9px] tracking-[0.12em] text-[var(--warm-cream)] transition-colors md:text-[10px]"
 
 const iconLinkClass =
-  "text-[var(--warm-cream)] transition-colors hover:text-[var(--warm-bone-bright)] p-1 -m-1 rounded-sm focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-[var(--warm-bone)]"
+  "text-[var(--warm-muted)] transition-colors hover:text-[var(--warm-bone-bright)] p-1 -m-1 rounded-sm"
 
 export function SiteHeader() {
   const pathname = usePathname()
@@ -38,21 +39,20 @@ export function SiteHeader() {
   useEffect(() => {
     const updateTime = () => {
       const now = new Date()
-      const options: Intl.DateTimeFormatOptions = {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-        hour: "numeric",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true,
-      }
-      setCurrentTime(now.toLocaleString("en-US", options))
+      setCurrentTime(
+        now.toLocaleString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        })
+      )
     }
-
     updateTime()
     const interval = setInterval(updateTime, 1000)
-
     return () => clearInterval(interval)
   }, [])
 
@@ -80,33 +80,84 @@ export function SiteHeader() {
           Blog
         </Link>
         <Link
-          href="http://cal.com/camfleety/30min?user=camfleety&month=2026-03"
+          href="https://cal.com/camfleety/30min?user=camfleety"
           target="_blank"
           rel="noopener noreferrer"
           className={navInactive}
         >
           Contact
         </Link>
-        <span className="hidden h-3 w-px bg-[var(--warm-border)] sm:inline-block" aria-hidden />
-        <Link
-          href={X_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={iconLinkClass}
-          aria-label="Cameron on X"
-        >
-          <XLogo className="h-[14px] w-[14px] md:h-4 md:w-4" />
-        </Link>
-        <Link
-          href={GITHUB_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={iconLinkClass}
-          aria-label="GitHub profile"
-        >
-          <Github className="h-[14px] w-[14px] md:h-4 md:w-4" strokeWidth={1.5} />
-        </Link>
       </nav>
     </header>
+  )
+}
+
+function ThemeToggle() {
+  const { theme, setTheme, resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => setMounted(true), [])
+  if (!mounted) return null
+
+  const isDark = resolvedTheme === "dark"
+
+  return (
+    <button
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      aria-label="Toggle theme"
+      className="flex items-center gap-1.5 rounded-full border border-[var(--warm-border)] bg-[var(--warm-bg-elevated)] px-2.5 py-1.5 transition-colors hover:border-[var(--warm-border-hover)]"
+    >
+      {/* sun */}
+      <svg
+        viewBox="0 0 24 24"
+        className={`h-3.5 w-3.5 transition-colors ${!isDark ? "text-[var(--warm-bone-bright)]" : "text-[var(--warm-muted)]"}`}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+      </svg>
+      {/* moon */}
+      <svg
+        viewBox="0 0 24 24"
+        className={`h-3.5 w-3.5 transition-colors ${isDark ? "text-[var(--warm-bone-bright)]" : "text-[var(--warm-muted)]"}`}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+      </svg>
+    </button>
+  )
+}
+
+export function SocialLinks() {
+  return (
+    <>
+      <div className="fixed bottom-6 left-6 md:bottom-8 md:left-8">
+        <ThemeToggle />
+      </div>
+      <div className="fixed bottom-6 right-6 flex items-center gap-2.5 md:bottom-8 md:right-8">
+      <Link
+        href={X_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={iconLinkClass}
+        aria-label="Cameron on X"
+      >
+        <XLogo className="h-4 w-4" />
+      </Link>
+      <Link
+        href={GITHUB_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={iconLinkClass}
+        aria-label="GitHub profile"
+      >
+        <Github className="h-4 w-4" strokeWidth={1.5} />
+      </Link>
+      </div>
+    </>
   )
 }
