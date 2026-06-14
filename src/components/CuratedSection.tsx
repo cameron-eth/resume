@@ -33,7 +33,7 @@ function Card({ item }: { item: CuratedItem }) {
             alt={item.title}
             fill
             className={`transition-transform duration-500 group-hover:scale-[1.02] ${item.category === "product" ? "object-contain p-4" : "object-cover"}`}
-            sizes="33vw"
+            sizes="(max-width: 768px) 80vw, 33vw"
           />
         ) : null}
 
@@ -130,9 +130,10 @@ export function CuratedSection() {
 
   return (
     <section className="mt-16 md:mt-20">
-      <div className="mb-5 flex items-center justify-between">
-        <div className="flex items-center gap-1">
-          <h2 className="mr-3 text-[9px] tracking-[0.14em] text-[var(--warm-muted)] md:text-[10px]">
+      {/* Header: filters left, pagination right — wraps on mobile */}
+      <div className="mb-5 flex flex-wrap items-center gap-y-2">
+        <div className="flex flex-1 flex-wrap items-center gap-1">
+          <h2 className="mr-2 text-[9px] tracking-[0.14em] text-[var(--warm-muted)] md:text-[10px]">
             Curated
           </h2>
           {filters.map((f) => (
@@ -152,7 +153,7 @@ export function CuratedSection() {
         {totalPages > 1 && (
           <button
             onClick={next}
-            className="flex items-center gap-1.5 text-[9px] tracking-[0.12em] text-[var(--warm-muted)] transition-colors hover:text-[var(--warm-bone-bright)] md:text-[10px]"
+            className="flex shrink-0 items-center gap-1.5 text-[9px] tracking-[0.12em] text-[var(--warm-muted)] transition-colors hover:text-[var(--warm-bone-bright)] md:text-[10px]"
           >
             <span>{page + 1} / {totalPages}</span>
             <svg
@@ -168,8 +169,9 @@ export function CuratedSection() {
         )}
       </div>
 
+      {/* Cards: horizontal scroll on mobile, 3-col grid on desktop */}
       <div
-        className="grid grid-cols-3 gap-3 md:gap-4"
+        className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:overflow-visible md:pb-0"
         style={{
           opacity: fading ? 0 : 1,
           transform: fading ? "translateY(6px)" : "translateY(0px)",
@@ -177,7 +179,9 @@ export function CuratedSection() {
         }}
       >
         {visible.map((item) => (
-          <Card key={item.id} item={item} />
+          <div key={item.id} className="w-[75vw] shrink-0 snap-start md:w-auto md:shrink md:snap-none">
+            <Card item={item} />
+          </div>
         ))}
       </div>
     </section>

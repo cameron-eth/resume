@@ -34,7 +34,7 @@ export function TimelineList({ items }: { items: TimelineItem[] }) {
                 </span>
               </span>
               {item.meta ? (
-                <span className="col-start-2 mt-1 text-[11px] tabular-nums text-[var(--warm-muted)] md:col-start-3 md:mt-0 md:text-right md:text-[13px]">
+                <span className="hidden md:col-start-3 md:block md:text-right md:text-[13px] md:tabular-nums md:text-[var(--warm-muted)]">
                   {item.meta}
                 </span>
               ) : null}
