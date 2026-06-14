@@ -135,10 +135,10 @@ function ThemeToggle() {
 export function SocialLinks() {
   return (
     <>
-      <div className="fixed bottom-6 left-6 md:bottom-8 md:left-8">
+      <div className="fixed bottom-6 left-6 z-50 md:bottom-8 md:left-8">
         <ThemeToggle />
       </div>
-      <div className="fixed bottom-6 right-6 flex items-center gap-2.5 md:bottom-8 md:right-8">
+      <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 md:bottom-8 md:right-8">
       <Link
         href={X_URL}
         target="_blank"
