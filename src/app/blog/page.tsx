@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { SiteHeader, SocialLinks } from "@/components/SiteHeader"
+import { SiteHeader, SiteFooter } from "@/components/SiteHeader"
 import { TimelineList, type TimelineItem } from "@/components/TimelineList"
 import { posts } from "@/content/projects"
 
@@ -20,14 +20,13 @@ const items: TimelineItem[] = posts.map((p) => ({
 export default function BlogIndexPage() {
   return (
     <div className="min-h-screen h-full bg-[var(--warm-bg)] text-[var(--warm-cream)]">
-      <div className="mx-auto w-full max-w-5xl px-6 pb-24 pt-10 md:px-10 md:pb-16 md:pt-12">
+      <div className="mx-auto w-full max-w-5xl px-6 pt-10 md:px-10 md:pt-12">
         <SiteHeader />
-
-        <SocialLinks />
         <main>
           <h1 className="sr-only">Blog</h1>
           <TimelineList items={items} />
         </main>
+        <SiteFooter />
       </div>
     </div>
   )

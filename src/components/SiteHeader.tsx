@@ -93,7 +93,7 @@ export function SiteHeader() {
 }
 
 function ThemeToggle() {
-  const { theme, setTheme, resolvedTheme } = useTheme()
+  const { setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => setMounted(true), [])
@@ -107,7 +107,6 @@ function ThemeToggle() {
       aria-label="Toggle theme"
       className="flex items-center gap-1.5 rounded-full border border-[var(--warm-border)] bg-[var(--warm-bg-elevated)] px-2.5 py-1.5 transition-colors hover:border-[var(--warm-border-hover)]"
     >
-      {/* sun */}
       <svg
         viewBox="0 0 24 24"
         className={`h-3.5 w-3.5 transition-colors ${!isDark ? "text-[var(--warm-bone-bright)]" : "text-[var(--warm-muted)]"}`}
@@ -118,7 +117,6 @@ function ThemeToggle() {
         <circle cx="12" cy="12" r="4" />
         <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
       </svg>
-      {/* moon */}
       <svg
         viewBox="0 0 24 24"
         className={`h-3.5 w-3.5 transition-colors ${isDark ? "text-[var(--warm-bone-bright)]" : "text-[var(--warm-muted)]"}`}
@@ -132,32 +130,30 @@ function ThemeToggle() {
   )
 }
 
-export function SocialLinks() {
+export function SiteFooter() {
   return (
-    <>
-      <div className="fixed bottom-6 left-6 z-50 md:bottom-8 md:left-8">
-        <ThemeToggle />
+    <footer className="mt-16 flex items-center justify-between border-t border-[var(--warm-border)] pt-6 pb-8 md:mt-20">
+      <ThemeToggle />
+      <div className="flex items-center gap-3">
+        <Link
+          href={X_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={iconLinkClass}
+          aria-label="Cameron on X"
+        >
+          <XLogo className="h-4 w-4" />
+        </Link>
+        <Link
+          href={GITHUB_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={iconLinkClass}
+          aria-label="GitHub profile"
+        >
+          <Github className="h-4 w-4" strokeWidth={1.5} />
+        </Link>
       </div>
-      <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 md:bottom-8 md:right-8">
-      <Link
-        href={X_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={iconLinkClass}
-        aria-label="Cameron on X"
-      >
-        <XLogo className="h-4 w-4" />
-      </Link>
-      <Link
-        href={GITHUB_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={iconLinkClass}
-        aria-label="GitHub profile"
-      >
-        <Github className="h-4 w-4" strokeWidth={1.5} />
-      </Link>
-      </div>
-    </>
+    </footer>
   )
 }
