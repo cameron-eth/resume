@@ -45,7 +45,7 @@ export default function DraftTheoryBlogPage() {
         </h1>
         <p className="text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
           key concepts, combine signals, surplus value, and why the draft behaves less like scouting
-          and more like a market — one where mis-priced assets matter more than picking the single
+          and more like a market - one where mis-priced assets matter more than picking the single
           best name on the board.
         </p>
       </header>
@@ -63,7 +63,7 @@ export default function DraftTheoryBlogPage() {
           <div>
             <dt className="font-medium text-[var(--warm-bone)]">draft stock</dt>
             <dd className="mt-1">
-              a player&apos;s perceived value leading up to the draft — performance, film, combine,
+              a player&apos;s perceived value leading up to the draft - performance, film, combine,
               media, and team demand.
             </dd>
           </div>
@@ -85,7 +85,7 @@ export default function DraftTheoryBlogPage() {
               weighted approximate value (wav)
             </dt>
             <dd className="mt-1">
-              pro-football-reference&apos;s career value metric — approximates contribution across
+              pro-football-reference&apos;s career value metric - approximates contribution across
               seasons and positions.
             </dd>
           </div>
@@ -105,7 +105,7 @@ export default function DraftTheoryBlogPage() {
         <P>
           that isn&apos;t breaking news, but it might not be as intuitive as we think. there
           isn&apos;t a universal definition of what &ldquo;success&rdquo; even means. for this
-          piece, we&apos;ll define it in buckets: position, profile, and draft capital — and walk
+          piece, we&apos;ll define it in buckets: position, profile, and draft capital - and walk
           the lifecycle of a prospect.
         </P>
       </section>
@@ -118,7 +118,7 @@ export default function DraftTheoryBlogPage() {
         </P>
         <P>
           the first combine was held in 1982 in tampa, florida. early on, psychological and medical
-          screening mattered as much as physical testing. today it tilts physical — but it left a
+          screening mattered as much as physical testing. today it tilts physical - but it left a
           high-quality longitudinal dataset analysts and gms can use to ask a simple question: how
           predictive are these events, alone and together?
         </P>
@@ -157,24 +157,24 @@ export default function DraftTheoryBlogPage() {
           </table>
         </div>
         <P>
-          when a team drafts a 4.21 runner, they aren&apos;t buying what he is — they&apos;re buying
+          when a team drafts a 4.21 runner, they aren&apos;t buying what he is - they&apos;re buying
           what that number made them believe he could become. there&apos;s a tax on imagination: at
           pick 25 the expected bar can climb toward 40 wav; at pick 60 a slower, more productive
           receiver might only need ~22 to break even.
         </P>
         <Callout>
           the strategy isn&apos;t to avoid highly desired players. it&apos;s to know which metrics
-          create asymmetric opportunity — and to stay aware of the tax embedded in the pick.
+          create asymmetric opportunity - and to stay aware of the tax embedded in the pick.
         </Callout>
       </section>
 
       <section className="space-y-4">
         <H2>historically notable 40 times (wr lens)</H2>
         <P>
-          on one end: henry ruggs (4.27), john ross (4.22), donte&apos; stallworth (4.29) —
+          on one end: henry ruggs (4.27), john ross (4.22), donte&apos; stallworth (4.29) -
           explosive testers with brutal surplus returns (−38, −41, −8 surplus av in this framing).
           on the other: anquan boldin (4.72) +57, jordy nelson (4.51) +35, jauan jennings (4.72) +35
-          — &ldquo;slow&rdquo; times that still produced huge surplus for the teams that bet on the
+          - &ldquo;slow&rdquo; times that still produced huge surplus for the teams that bet on the
           full profile.
         </P>
         <P>
@@ -191,19 +191,19 @@ export default function DraftTheoryBlogPage() {
       <section className="space-y-3">
         <H2>the nfl draft: un-natural selection</H2>
         <P>
-          variance is the engine of surplus value — and it helps explain why bad teams race to the
+          variance is the engine of surplus value - and it helps explain why bad teams race to the
           bottom for the first pick. a rookie qb, a disruptive edge, or a bookend tackle can flip an
           organization. the 2024 commanders, 2025 patriots, and 2013 seahawks are recent reminders
           of what happens when surplus shows up in bulk.
         </P>
         <P>
-          perceived value often peaks during the draft itself. teams pay for hope, not certainty —
+          perceived value often peaks during the draft itself. teams pay for hope, not certainty -
           especially after a loud combine or when qb, lt, wr, or de scarcity spooks the room.
         </P>
         <P>
           the league is impatient: injuries, aging curves, and new talent are always incoming. gms
           picking high sometimes refuse the &ldquo;time tax&rdquo; of trading back for more bites at
-          the apple — and cap their own optionality.
+          the apple - and cap their own optionality.
         </P>
         <Callout>
           it&apos;s better to walk in the right direction than sprint in the wrong one.
@@ -223,7 +223,7 @@ export default function DraftTheoryBlogPage() {
           </div>
         </div>
         <P>
-          a gm may not even be in the building to see the full arc of a pick they make — which warps
+          a gm may not even be in the building to see the full arc of a pick they make - which warps
           incentives toward short-term certainty over long-run portfolio thinking.
         </P>
       </section>
@@ -231,7 +231,7 @@ export default function DraftTheoryBlogPage() {
       <section className="space-y-3">
         <H2>the first round: a crap shoot</H2>
         <P>
-          more targets, more misses. the higher the pick, the higher the pressure — and the
+          more targets, more misses. the higher the pick, the higher the pressure - and the
           franchise cost of being wrong isn&apos;t just wasted capital. it&apos;s opportunity cost:
           the player you should have taken is wearing someone else&apos;s colors.
         </P>
@@ -239,7 +239,7 @@ export default function DraftTheoryBlogPage() {
         <P>
           top-10 picks average about <span className="text-red-400/90">−2.4 surplus av</span>; round
           2 averages roughly <span className="text-emerald-400/80">+1.0</span>. round 1 top-10 ev is
-          often priced like 40–60 av — a bar few clear — while round 2 is priced closer to 20–30,
+          often priced like 40–60 av - a bar few clear - while round 2 is priced closer to 20–30,
           which is more achievable. the whiffs (ruggs, ross, mcfadden, ricky williams types) are
           catastrophic in magnitude.
         </P>
@@ -248,7 +248,7 @@ export default function DraftTheoryBlogPage() {
       <section className="space-y-3">
         <H2>bad jimmy&apos;s</H2>
         <P>
-          jimmy johnson helped popularize pick value charts — a modeled approach to the draft. with
+          jimmy johnson helped popularize pick value charts - a modeled approach to the draft. with
           hindsight, the classic curve over-weights early selections relative to what surplus data
           suggests.
         </P>
@@ -259,24 +259,24 @@ export default function DraftTheoryBlogPage() {
           <p className="mt-2">
             each additional pick in a class adds about{" "}
             <span className="font-mono text-[var(--warm-bone)]">+14.8</span> av on average{" "}
-            <span className="text-[var(--warm-muted)]">(r ≈ 0.39)</span> — one way to formalize
+            <span className="text-[var(--warm-muted)]">(r ≈ 0.39)</span> - one way to formalize
             exchanging one lottery ticket for two (or more) and diversifying injury, bust, and
             variance risk.
           </p>
         </div>
         <P>
-          variance humbles everyone. career success isn&apos;t binary — sam darnold, odell beckham
+          variance humbles everyone. career success isn&apos;t binary - sam darnold, odell beckham
           jr., and baker mayfield are different shapes of the same lesson: huge over-achievement in
           one chapter, under-achievement in another.
         </P>
         <Callout>
           realized value ≠ captured value. a player can outrun his slot over a career while the
-          drafting team never benefits — bad development, early trade, or selling low before the
+          drafting team never benefits - bad development, early trade, or selling low before the
           breakout.
         </Callout>
         <P>
           darnold is the clean example: picked third overall (~53–54 wav ev by this framing),
-          written off early, passed around, then eventually cleared the bar — after multiple teams
+          written off early, passed around, then eventually cleared the bar - after multiple teams
           had already moved on.
         </P>
       </section>
@@ -284,10 +284,10 @@ export default function DraftTheoryBlogPage() {
       <section className="space-y-3">
         <H2>post-draft meaning of draft capital</H2>
         <P>
-          draft capital is just when you picked — and it turns out to be one of the strongest
+          draft capital is just when you picked - and it turns out to be one of the strongest
           anchors for expected outcomes. it&apos;s also sunk cost: high investment makes it
           psychologically costly to admit a miss. dynasty players know the feeling; nfl gms face the
-          same &ldquo;darnolded&rdquo; fear — admitting defeat can feel like career risk.
+          same &ldquo;darnolded&rdquo; fear - admitting defeat can feel like career risk.
         </P>
       </section>
 
@@ -300,7 +300,7 @@ export default function DraftTheoryBlogPage() {
         <P>
           this april las vegas holds the no. 1 pick; if the board converges on fernando mendoza as
           the qb of the future, that moment looks less like a scouting decision and more like buying
-          a hyper-growth name at ipo — where another, more desperate bidder might pay a wild premium
+          a hyper-growth name at ipo - where another, more desperate bidder might pay a wild premium
           to take you out of the risk.
         </P>
         <P>which is one reason to seriously consider trading the pick.</P>
@@ -327,7 +327,7 @@ export default function DraftTheoryBlogPage() {
               top 5 all-time draft gems (2015-2024)
             </h3>
             <p className="mt-2 text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
-              these players did not just beat expectations — they blew past the price implied by
+              these players did not just beat expectations - they blew past the price implied by
               where they were picked.
             </p>
             <ul className="mt-3 space-y-2 text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
@@ -405,7 +405,7 @@ export default function DraftTheoryBlogPage() {
 
       <footer className="space-y-3 pt-2">
         <p className="text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
-          model detail — feature importance, holdout design, and team-level patterns — continues on
+          model detail - feature importance, holdout design, and team-level patterns - continues on
           the dashboard.
         </p>
         <Link

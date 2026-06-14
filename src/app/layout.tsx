@@ -4,7 +4,18 @@ import { ThemeProvider } from "@/components/ThemeProvider"
 
 export const metadata: Metadata = {
   title: "Hi, I'm Cameron",
-  description: "Welcome",
+  description: "Cameron Norfleet — product, data, and AI.",
+  openGraph: {
+    title: "Cameron Norfleet",
+    description: "Product, data, and AI.",
+    images: [],
+  },
+  twitter: {
+    card: "summary",
+    title: "Cameron Norfleet",
+    description: "Product, data, and AI.",
+    images: [],
+  },
 }
 
 export default function RootLayout({
