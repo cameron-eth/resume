@@ -39,7 +39,7 @@ export const projects: Project[] = [
   {
     year: "2024",
     name: "draft theory",
-    url: "https://v0-draft-theory.vercel.app/",
+    url: "https://github.com/cameron-eth/draft-theory",
     blogSlug: "/blog/draft-theory",
     value: "r² 0.414",
     subjects: ["data modeling", "nfl draft"],
@@ -81,7 +81,7 @@ export const posts: Post[] = [
       "nfl draft theory: a data-driven exploration of the nfl's parity machine (combine, surplus value, and trading back)",
     href: "/blog/draft-theory",
     projectName: "draft theory",
-    projectUrl: "https://v0-draft-theory.vercel.app/",
+    projectUrl: "https://github.com/cameron-eth/draft-theory",
     value: "r² 0.414",
     subjects: ["data modeling", "nfl draft"],
   },
