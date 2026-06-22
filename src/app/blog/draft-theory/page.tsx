@@ -409,12 +409,12 @@ export default function DraftTheoryBlogPage() {
           the dashboard.
         </p>
         <Link
-          href="https://v0-draft-theory.vercel.app/"
+          href="https://github.com/cameron-eth/draft-theory"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block text-[10px] tracking-[0.12em] text-[var(--warm-cream)] underline-offset-4 transition-colors hover:text-[var(--warm-bone-bright)] hover:underline md:text-[11px]"
         >
-          open the draft theory project
+          view the draft theory project on github
         </Link>
       </footer>
     </BlogArticleShell>
