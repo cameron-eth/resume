@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─────────────────────────────────────────────────────────────
+   Typefaces
+   Display / body: CursorGothic (self-hosted)
+   Metadata: IBM Plex Mono (self-hosted via @fontsource, imported in layout)
+   ───────────────────────────────────────────────────────────── */
+
 @font-face {
   font-family: "CursorGothic";
   src: url("/fonts/CursorGothic-Regular.woff2") format("woff2");
@@ -34,89 +40,152 @@
   font-style: italic;
 }
 
-body {
-  font-family:
-    "CursorGothic",
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
-}
-
 @layer base {
-  /* ── Light mode (default) ── */
+  /* ── Paper (default) ── */
   :root {
-    --warm-bg: #f7f7f4;
-    --warm-bg-elevated: #f0efea;
-    --warm-card-02: #ebeae5;
-    --warm-card-03: #e6e5e0;
-    --warm-card-04: #e1e0db;
-    --warm-bone: #26251e;
-    --warm-bone-bright: #f54e00;
-    --warm-cream: #3b3a33;
-    --warm-cream-dim: #23221e;
-    --warm-muted: #918f88;
-    --warm-muted-dim: #b8b6af;
-    --warm-border: #e1e0db;
-    --warm-border-hover: #cccbc5;
-    --warm-pill: #ebeae5;
-    --warm-amber: #f54e00;
-    --warm-olive: #5c5a54;
-    --warm-gold: #f54e00;
-    --warm-orange: #f54e00;
+    --paper: #f1f1ef;
+    --raised: #e7e7e2;
+    --ink: #0b0b0a;
+    --ink-2: #55554f;
+    --ink-3: #6b6b65;
+    --rule: #dad9d4;
+    --rule-2: #c2c1bb;
 
-    --background: 60 14% 96%;
-    --foreground: 50 14% 13%;
-    --border: 55 10% 87%;
-    --ring: 17 100% 48%;
-    --radius: 0.5rem;
+    /* Spectrum — decorative only. Never sits under type. */
+    --s-red: #e5322b;
+    --s-orange: #f5731e;
+    --s-yellow: #f0b505;
+    --s-green: #4caf3e;
+    --s-teal: #12a69b;
+    --s-blue: #2563d9;
+    --s-violet: #7b3fd4;
+    --s-magenta: #e12b8a;
+
+    /* Semantic polarity for data. Deliberately NOT part of the decorative
+       spectrum: these do sit under type, so they are chosen for contrast
+       against paper rather than for saturation. */
+    --pos: #1f7a33;
+    --neg: #b3261e;
+
+    /* Grid module — the mosaic pixel. Everything snaps to it. */
+    --cell: 8px;
+
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    /* Synthetic weight for display type. CursorGothic Bold is lighter
+       than the reference wordmark; this thickens it at large sizes only.
+       Set to 0 to drop the compensation entirely. */
+    --display-stroke: 0.014em;
   }
 
-  /* ── Dark mode ── */
+  /* ── Black paper ── */
   .dark {
-    --warm-bg: #14120b;
-    --warm-bg-elevated: #1b1913;
-    --warm-card-02: #201e18;
-    --warm-card-03: #26241e;
-    --warm-card-04: #2b2923;
-    --warm-bone: #edecec;
-    --warm-bone-bright: #f54e00;
-    --warm-cream: #d7d6d5;
-    --warm-cream-dim: #969592;
-    --warm-muted: #6b6966;
-    --warm-muted-dim: #4a4845;
-    --warm-border: #2b2923;
-    --warm-border-hover: #3a3730;
-    --warm-pill: #201e18;
-    --warm-amber: #f54e00;
-    --warm-olive: #969592;
-    --warm-gold: #f54e00;
-    --warm-orange: #f54e00;
+    --paper: #0b0b0a;
+    --raised: #171716;
+    --ink: #f1f1ef;
+    --ink-2: #a6a69f;
+    --ink-3: #7b7b74;
+    --rule: #242422;
+    --rule-2: #35342f;
 
-    --background: 45 20% 7%;
-    --foreground: 60 5% 93%;
-    --border: 45 12% 16%;
-    --ring: 17 100% 48%;
+    --pos: #63a85a;
+    --neg: #d6524c;
+
+    /* Desaturated + lifted: at full chroma these glow on black. */
+    --s-red: #d6524c;
+    --s-orange: #de8244;
+    --s-yellow: #d0a93f;
+    --s-green: #63a85a;
+    --s-teal: #3e9e96;
+    --s-blue: #4e77cc;
+    --s-violet: #8a5fcc;
+    --s-magenta: #cc5691;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: var(--rule);
   }
+
   html {
     scroll-behavior: smooth;
-    background-color: var(--warm-bg);
-    height: 100%;
+    background-color: var(--paper);
   }
+
+  /* No height:100% here — it pins body to the viewport and traps scrolling.
+     The page wrapper's min-h-screen already guarantees a full-height ground. */
   body {
-    background-color: var(--warm-bg);
-    color: var(--warm-cream);
-    min-height: 100%;
-    height: 100%;
+    background-color: var(--paper);
+    color: var(--ink-2);
+    min-height: 100vh;
+    font-family:
+      "CursorGothic",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Helvetica Neue",
+      Arial,
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
+
   #__next,
   [data-nextjs-scroll-focus-boundary] {
-    background-color: var(--warm-bg);
-    min-height: 100%;
+    background-color: var(--paper);
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Display register — heavy, lowercase, tight. */
+  .display {
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    color: var(--ink);
+    -webkit-text-stroke: var(--display-stroke) currentColor;
+  }
+
+  /* Row marker — inert until its row is hovered or focused, then it
+     ignites to the project's own hue. The only place color signals state. */
+  .mosaic-mark-cell {
+    background: var(--ink-3);
+    transition: background 150ms ease;
+  }
+  .group:hover .mosaic-mark-cell,
+  .group:focus-visible .mosaic-mark-cell {
+    background: var(--mark-hue);
+  }
+
+  /* Metadata register — mono, uppercase, wide. */
+  .slug {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

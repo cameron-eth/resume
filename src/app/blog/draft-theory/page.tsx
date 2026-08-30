@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 function P({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
+    <p className="text-[15px] leading-relaxed text-[var(--ink-2)] md:text-[17px]">
       {children}
     </p>
   )
@@ -19,7 +19,7 @@ function P({ children }: { children: React.ReactNode }) {
 
 function H2({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-[11px] tracking-[0.11em] text-[var(--warm-muted)] md:text-[12px]">
+    <h2 className="slug text-[10px] text-[var(--ink-3)]">
       {children}
     </h2>
   )
@@ -27,7 +27,7 @@ function H2({ children }: { children: React.ReactNode }) {
 
 function Callout({ children }: { children: React.ReactNode }) {
   return (
-    <blockquote className="border-l border-[var(--warm-border)] pl-4 text-[11px] italic leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
+    <blockquote className="border-l border-[var(--rule)] pl-4 text-[15px] italic leading-relaxed text-[var(--ink-2)] md:text-[17px]">
       {children}
     </blockquote>
   )
@@ -37,13 +37,13 @@ export default function DraftTheoryBlogPage() {
   return (
     <BlogArticleShell>
       <header className="space-y-3">
-        <p className="text-[10px] tracking-[0.12em] text-[var(--warm-muted)] md:text-[11px]">
+        <p className="slug text-[10px] text-[var(--ink-3)]">
           apr 5, 2026
         </p>
-        <h1 className="font-[ui-serif,Georgia,Cambria,Times_New_Roman,Times,serif] text-[1.5rem] leading-[1.2] text-[var(--warm-bone)] md:text-[2rem]">
+        <h1 className="font-[ui-serif,Georgia,Cambria,Times_New_Roman,Times,serif] text-[1.5rem] leading-[1.2] text-[var(--ink)] md:text-[2rem]">
           nfl draft theory: a data-driven exploration of the nfl&apos;s parity machine
         </h1>
-        <p className="text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
+        <p className="text-[15px] leading-relaxed text-[var(--ink-2)] md:text-[17px]">
           key concepts, combine signals, surplus value, and why the draft behaves less like scouting
           and more like a market, one where mis-priced assets matter more than picking the single
           best name on the board.
@@ -52,36 +52,36 @@ export default function DraftTheoryBlogPage() {
 
       <section className="space-y-4">
         <H2>key concepts &amp; glossary</H2>
-        <dl className="space-y-4 text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
+        <dl className="space-y-4 text-[15px] leading-relaxed text-[var(--ink-2)] md:text-[17px]">
           <div>
-            <dt className="font-medium text-[var(--warm-bone)]">draft capital</dt>
+            <dt className="font-medium text-[var(--ink)]">draft capital</dt>
             <dd className="mt-1">
               the value associated with a player&apos;s selection position in the nfl draft. earlier
               picks carry higher expectations and historically produce greater career value.
             </dd>
           </div>
           <div>
-            <dt className="font-medium text-[var(--warm-bone)]">draft stock</dt>
+            <dt className="font-medium text-[var(--ink)]">draft stock</dt>
             <dd className="mt-1">
               a player&apos;s perceived value leading up to the draft, performance, film, combine,
               media, and team demand.
             </dd>
           </div>
           <div>
-            <dt className="font-medium text-[var(--warm-bone)]">profile</dt>
+            <dt className="font-medium text-[var(--ink)]">profile</dt>
             <dd className="mt-1">
               the full evaluative picture: athletic traits, production, measurables, and scouting
               analysis.
             </dd>
           </div>
           <div>
-            <dt className="font-medium text-[var(--warm-bone)]">ev (expected value)</dt>
+            <dt className="font-medium text-[var(--ink)]">ev (expected value)</dt>
             <dd className="mt-1">
               the historical average career output expected from a player drafted at a given slot.
             </dd>
           </div>
           <div>
-            <dt className="font-medium text-[var(--warm-bone)]">
+            <dt className="font-medium text-[var(--ink)]">
               weighted approximate value (wav)
             </dt>
             <dd className="mt-1">
@@ -90,7 +90,7 @@ export default function DraftTheoryBlogPage() {
             </dd>
           </div>
           <div>
-            <dt className="font-medium text-[var(--warm-bone)]">position</dt>
+            <dt className="font-medium text-[var(--ink)]">position</dt>
             <dd className="mt-1">the role on the field (wr, rb, te, cb, etc.).</dd>
           </div>
         </dl>
@@ -130,10 +130,10 @@ export default function DraftTheoryBlogPage() {
           the marquee drill. for most players, one or two tenths of a second can mean millions of
           dollars in contract and draft position.
         </P>
-        <div className="overflow-x-auto rounded border border-[var(--warm-border)] text-[11px] md:text-[12px]">
-          <table className="w-full border-collapse text-left text-[var(--warm-cream-dim)]">
+        <div className="overflow-x-auto border border-[var(--rule)] text-[13px] md:text-[14px]">
+          <table className="w-full border-collapse text-left text-[var(--ink-2)]">
             <thead>
-              <tr className="border-b border-[var(--warm-border)] bg-[var(--warm-bg-elevated)] text-[10px] uppercase tracking-[0.08em] text-[var(--warm-muted)]">
+              <tr className="border-b border-[var(--rule)] bg-[var(--raised)] slug text-[10px] text-[var(--ink-3)]">
                 <th className="px-3 py-2 font-normal">player type</th>
                 <th className="px-3 py-2 font-normal">draft pick</th>
                 <th className="px-3 py-2 font-normal">expected wav</th>
@@ -141,17 +141,17 @@ export default function DraftTheoryBlogPage() {
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-[var(--warm-border)]">
-                <td className="px-3 py-2 text-[var(--warm-bone)]">elite speed wr</td>
+              <tr className="border-b border-[var(--rule)]">
+                <td className="px-3 py-2 text-[var(--ink)]">elite speed wr</td>
                 <td className="px-3 py-2 font-mono">25</td>
                 <td className="px-3 py-2 font-mono">40</td>
-                <td className="px-3 py-2 font-mono text-red-400/90">34</td>
+                <td className="px-3 py-2 font-mono text-neg">34</td>
               </tr>
               <tr>
-                <td className="px-3 py-2 text-[var(--warm-bone)]">average speed wr</td>
+                <td className="px-3 py-2 text-[var(--ink)]">average speed wr</td>
                 <td className="px-3 py-2 font-mono">60</td>
                 <td className="px-3 py-2 font-mono">22</td>
-                <td className="px-3 py-2 font-mono text-emerald-400/80">26</td>
+                <td className="px-3 py-2 font-mono text-pos">26</td>
               </tr>
             </tbody>
           </table>
@@ -208,18 +208,18 @@ export default function DraftTheoryBlogPage() {
         <Callout>
           it&apos;s better to walk in the right direction than sprint in the wrong one.
         </Callout>
-        <div className="grid grid-cols-3 gap-3 text-center text-[10px] md:text-[11px]">
-          <div className="rounded border border-[var(--warm-border)] bg-[var(--warm-bg-elevated)] px-2 py-3">
-            <p className="font-mono text-lg text-[var(--warm-bone)]">36%</p>
-            <p className="mt-1 text-[var(--warm-muted)]">drafted players gone by year 4</p>
+        <div className="grid grid-cols-3 gap-3 text-center">
+          <div className="border border-[var(--rule)] bg-[var(--raised)] px-2 py-3">
+            <p className="font-mono text-lg text-[var(--ink)]">36%</p>
+            <p className="mt-1 text-[var(--ink-3)]">drafted players gone by year 4</p>
           </div>
-          <div className="rounded border border-[var(--warm-border)] bg-[var(--warm-bg-elevated)] px-2 py-3">
-            <p className="font-mono text-lg text-[var(--warm-bone)]">6</p>
-            <p className="mt-1 text-[var(--warm-muted)]">median career length (yrs)</p>
+          <div className="border border-[var(--rule)] bg-[var(--raised)] px-2 py-3">
+            <p className="font-mono text-lg text-[var(--ink)]">6</p>
+            <p className="mt-1 text-[var(--ink-3)]">median career length (yrs)</p>
           </div>
-          <div className="rounded border border-[var(--warm-border)] bg-[var(--warm-bg-elevated)] px-2 py-3">
-            <p className="font-mono text-lg text-[var(--warm-bone)]">4–5</p>
-            <p className="mt-1 text-[var(--warm-muted)]">avg gm tenure (yrs)</p>
+          <div className="border border-[var(--rule)] bg-[var(--raised)] px-2 py-3">
+            <p className="font-mono text-lg text-[var(--ink)]">4–5</p>
+            <p className="mt-1 text-[var(--ink-3)]">avg gm tenure (yrs)</p>
           </div>
         </div>
         <P>
@@ -237,8 +237,8 @@ export default function DraftTheoryBlogPage() {
         </P>
         <H2>the evidence</H2>
         <P>
-          top-10 picks average about <span className="text-red-400/90">−2.4 surplus av</span>; round
-          2 averages roughly <span className="text-emerald-400/80">+1.0</span>. round 1 top-10 ev is
+          top-10 picks average about <span className="text-neg">−2.4 surplus av</span>; round
+          2 averages roughly <span className="text-pos">+1.0</span>. round 1 top-10 ev is
           often priced like 40–60 av, a bar few clear, while round 2 is priced closer to 20–30,
           which is more achievable. the whiffs (ruggs, ross, mcfadden, ricky williams types) are
           catastrophic in magnitude.
@@ -252,14 +252,14 @@ export default function DraftTheoryBlogPage() {
           hindsight, the classic curve over-weights early selections relative to what surplus data
           suggests.
         </P>
-        <div className="rounded border border-[var(--warm-border)] bg-[var(--warm-bg-elevated)] px-4 py-3 text-[11px] text-[var(--warm-cream-dim)] md:text-[13px]">
-          <p className="text-[10px] uppercase tracking-[0.1em] text-[var(--warm-muted)]">
+        <div className="border border-[var(--rule)] bg-[var(--raised)] px-4 py-3 text-[15px] text-[var(--ink-2)] md:text-[17px]">
+          <p className="slug text-[10px] text-[var(--ink-3)]">
             trade-back thesis
           </p>
           <p className="mt-2">
             each additional pick in a class adds about{" "}
-            <span className="font-mono text-[var(--warm-bone)]">+14.8</span> av on average{" "}
-            <span className="text-[var(--warm-muted)]">(r ≈ 0.39)</span>, one way to formalize
+            <span className="font-mono text-[var(--ink)]">+14.8</span> av on average{" "}
+            <span className="text-[var(--ink-3)]">(r ≈ 0.39)</span>, one way to formalize
             exchanging one lottery ticket for two (or more) and diversifying injury, bust, and
             variance risk.
           </p>
@@ -314,7 +314,7 @@ export default function DraftTheoryBlogPage() {
         </Callout>
       </section>
 
-      <section className="space-y-4 border-t border-[var(--warm-border)] pt-8">
+      <section className="space-y-4 border-t border-[var(--rule)] pt-8">
         <H2>appendix: findings from the 2015–2024 model</H2>
         <P>
           the interactive build still lives on the project site; below is the quantitative spine
@@ -323,14 +323,14 @@ export default function DraftTheoryBlogPage() {
         </P>
         <div className="space-y-4">
           <div>
-            <h3 className="text-[10px] tracking-[0.1em] text-[var(--warm-muted)] md:text-[11px]">
+            <h3 className="slug text-[10px] text-[var(--ink-3)]">
               top 5 all-time draft gems (2015-2024)
             </h3>
-            <p className="mt-2 text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
+            <p className="mt-2 text-[15px] leading-relaxed text-[var(--ink-2)] md:text-[17px]">
               these players did not just beat expectations, they blew past the price implied by
               where they were picked.
             </p>
-            <ul className="mt-3 space-y-2 text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
+            <ul className="mt-3 space-y-2 text-[15px] leading-relaxed text-[var(--ink-2)] md:text-[17px]">
               <li>tyreek hill (r5 p165): +259.0 surplus | ev 147.4 → actual 406.4</li>
               <li>budda baker (r2 p36): +173.8 surplus | ev 110.0 → actual 283.8</li>
               <li>t.j. watt (r1 p30): +168.2 surplus | ev 107.0 → actual 275.2</li>
@@ -340,19 +340,19 @@ export default function DraftTheoryBlogPage() {
           </div>
 
           <div>
-            <h3 className="text-[10px] tracking-[0.1em] text-[var(--warm-muted)] md:text-[11px]">
+            <h3 className="slug text-[10px] text-[var(--ink-3)]">
               best and worst positions to draft
             </h3>
-            <p className="mt-2 text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
+            <p className="mt-2 text-[15px] leading-relaxed text-[var(--ink-2)] md:text-[17px]">
               some positions look chaotic in single seasons but still deliver positive long-run
               surplus; others skew boom-bust.
             </p>
             <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <p className="text-[10px] tracking-[0.1em] text-[var(--warm-muted)] md:text-[11px]">
+                <p className="slug text-[10px] text-[var(--ink-3)]">
                   best avg surplus
                 </p>
-                <ul className="space-y-1 text-[11px] text-[var(--warm-cream-dim)] md:text-[13px]">
+                <ul className="space-y-1 text-[15px] text-[var(--ink-2)] md:text-[17px]">
                   <li>+5.6 nt (nose tackle)</li>
                   <li>+4.6 center</li>
                   <li>+4.0 punter</li>
@@ -361,27 +361,27 @@ export default function DraftTheoryBlogPage() {
                 </ul>
               </div>
               <div className="space-y-2">
-                <p className="text-[10px] tracking-[0.1em] text-[var(--warm-muted)] md:text-[11px]">
+                <p className="slug text-[10px] text-[var(--ink-3)]">
                   worst avg surplus
                 </p>
-                <ul className="space-y-1 text-[11px] text-[var(--warm-cream-dim)] md:text-[13px]">
+                <ul className="space-y-1 text-[15px] text-[var(--ink-2)] md:text-[17px]">
                   <li>−1.6 wr</li>
                   <li>−2.6 cb</li>
                   <li>−3.2 de</li>
                 </ul>
               </div>
             </div>
-            <p className="mt-3 text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
+            <p className="mt-3 text-[15px] leading-relaxed text-[var(--ink-2)] md:text-[17px]">
               takeaway: interior linemen look consistently underrated; edge and db outcomes skew
               boom-bust; wr has lagged in surplus terms more than most people expect.
             </p>
           </div>
 
           <div>
-            <h3 className="text-[10px] tracking-[0.1em] text-[var(--warm-muted)] md:text-[11px]">
+            <h3 className="slug text-[10px] text-[var(--ink-3)]">
               top 5 biggest draft busts (2015-2024)
             </h3>
-            <ul className="mt-2 space-y-1 text-[11px] text-[var(--warm-cream-dim)] md:text-[13px]">
+            <ul className="mt-2 space-y-1 text-[15px] text-[var(--ink-2)] md:text-[17px]">
               <li>eli apple (r1 p10): -76.8 surplus | ev 142.6 → actual 65.8</li>
               <li>ed oliver (r1 p9): -75.8 surplus | ev 164.2 → actual 88.4</li>
               <li>malik mcdowell (r2 p35): -70.0 surplus | low realized return</li>
@@ -389,10 +389,10 @@ export default function DraftTheoryBlogPage() {
           </div>
 
           <div>
-            <h3 className="text-[10px] tracking-[0.1em] text-[var(--warm-muted)] md:text-[11px]">
+            <h3 className="slug text-[10px] text-[var(--ink-3)]">
               best drafting teams by avg surplus per pick (2015-2024)
             </h3>
-            <ul className="mt-2 space-y-1 text-[11px] text-[var(--warm-cream-dim)] md:text-[13px]">
+            <ul className="mt-2 space-y-1 text-[15px] text-[var(--ink-2)] md:text-[17px]">
               <li>1. chiefs: +10.9 (71 picks)</li>
               <li>2. cowboys: +5.3 (77 picks)</li>
               <li>3. rams (stl + la): +4.0 (88 picks)</li>
@@ -404,7 +404,7 @@ export default function DraftTheoryBlogPage() {
       </section>
 
       <footer className="space-y-3 pt-2">
-        <p className="text-[11px] leading-relaxed text-[var(--warm-cream-dim)] md:text-[13px]">
+        <p className="text-[15px] leading-relaxed text-[var(--ink-2)] md:text-[17px]">
           model detail, feature importance, holdout design, and team-level patterns, continues on
           the dashboard.
         </p>
@@ -412,7 +412,7 @@ export default function DraftTheoryBlogPage() {
           href="https://github.com/cameron-eth/draft-theory"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block text-[10px] tracking-[0.12em] text-[var(--warm-cream)] underline-offset-4 transition-colors hover:text-[var(--warm-bone-bright)] hover:underline md:text-[11px]"
+          className="inline-block slug text-[10px] text-[var(--ink-3)] underline-offset-4 transition-colors hover:text-[var(--ink)] hover:underline md:text-[15px]"
         >
           view the draft theory project on github
         </Link>

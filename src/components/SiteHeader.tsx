@@ -1,13 +1,17 @@
 "use client"
 
 import Link from "next/link"
-import { Github } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
+import { Github } from "lucide-react"
+
+import { Wordmark } from "@/components/brand/Wordmark"
+import { Slug } from "@/components/brand/Slug"
 
 const GITHUB_URL = "https://github.com/cameron-eth"
 const X_URL = "https://x.com/camfleety"
+const CAL_URL = "https://cal.com/camfleety/30min?user=camfleety"
 
 function XLogo({ className }: { className?: string }) {
   return (
@@ -20,74 +24,93 @@ function XLogo({ className }: { className?: string }) {
   )
 }
 
-const navInactive =
-  "text-[9px] tracking-[0.12em] text-[var(--warm-muted)] transition-colors hover:text-[var(--warm-bone-bright)] md:text-[10px]"
-
-const navActive =
-  "text-[9px] tracking-[0.12em] text-[var(--warm-cream)] transition-colors md:text-[10px]"
-
-const iconLinkClass =
-  "text-[var(--warm-muted)] transition-colors hover:text-[var(--warm-bone-bright)] p-1 -m-1 rounded-sm"
+/**
+ * Nav items are metadata, not display type. Active state is a rule under the
+ * label — never a color, since the spectrum stays decorative.
+ */
+function NavLink({
+  href,
+  active,
+  external,
+  children,
+}: {
+  href: string
+  active?: boolean
+  external?: boolean
+  children: React.ReactNode
+}) {
+  return (
+    <Link
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      className={`slug pb-1 text-[10px] transition-colors ${
+        active
+          ? "border-b border-ink text-ink"
+          : "border-b border-transparent text-ink-3 hover:text-ink"
+      }`}
+    >
+      {children}
+    </Link>
+  )
+}
 
 export function SiteHeader() {
   const pathname = usePathname()
-  const [currentTime, setCurrentTime] = useState<string>("")
+  const [stamp, setStamp] = useState<string>("")
 
   const onProjects = pathname === "/"
   const onBlog = pathname === "/blog" || pathname.startsWith("/blog/")
 
   useEffect(() => {
-    const updateTime = () => {
+    const update = () => {
       const now = new Date()
-      setCurrentTime(
-        now.toLocaleString("en-US", {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-          hour: "numeric",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true,
-        })
-      )
+      const date = now
+        .toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit" })
+        .replace(/\//g, ".")
+      const time = now.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      })
+      setStamp(`${date} ${time}`)
     }
-    updateTime()
-    const interval = setInterval(updateTime, 1000)
-    return () => clearInterval(interval)
+    update()
+    const id = setInterval(update, 1000)
+    return () => clearInterval(id)
   }, [])
 
   return (
-    <header className="mb-8 flex items-start justify-between md:mb-10">
-      <div>
-        <Link
-          href="/"
-          className="block text-xl font-semibold tracking-tight transition-colors hover:text-[var(--warm-bone-bright)] md:text-2xl"
-        >
-          Cameron Norfleet
-        </Link>
-        {currentTime && (
-          <p className="mt-1 text-[9px] tracking-[0.12em] text-[var(--warm-muted)] md:text-[10px]">
-            {currentTime}
-          </p>
-        )}
+    <header className="mb-12 md:mb-16">
+      {/* Specimen slug — the running head */}
+      <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-rule pb-2">
+        <Slug strong>Norfleet.tech</Slug>
+        <Slug>
+          {/* Reserve the width so the ticking clock never reflows the rule */}
+          <span className="inline-block min-w-[9.5rem] text-right tabular-nums">
+            {stamp || " "}
+          </span>
+        </Slug>
       </div>
 
-      <nav className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 pt-1 md:gap-x-5">
-        <Link href="/" className={onProjects ? navActive : navInactive}>
-          Projects
+      <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-6">
+        <Link href="/" aria-label="norfleet.tech — home" className="group block">
+          <Wordmark size={48} animate />
         </Link>
-        <Link href="/blog" className={onBlog ? navActive : navInactive}>
-          Blog
-        </Link>
-        <Link
-          href="https://cal.com/camfleety/30min?user=camfleety"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`hidden md:inline ${navInactive}`}
-        >
-          Contact
-        </Link>
-      </nav>
+
+        <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 pb-1">
+          <NavLink href="/" active={onProjects}>
+            Projects
+          </NavLink>
+          <NavLink href="/blog" active={onBlog}>
+            Blog
+          </NavLink>
+          <NavLink href={CAL_URL} external>
+            Contact
+          </NavLink>
+        </nav>
+      </div>
     </header>
   )
 }
@@ -97,62 +120,50 @@ function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => setMounted(true), [])
-  if (!mounted) return null
+  if (!mounted) {
+    // Reserve the slot so the footer doesn't jump on hydration.
+    return <span className="block h-[18px] w-[5.5rem]" aria-hidden="true" />
+  }
 
   const isDark = resolvedTheme === "dark"
 
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      aria-label="Toggle theme"
-      className="flex items-center gap-1.5 rounded-full border border-[var(--warm-border)] bg-[var(--warm-bg-elevated)] px-2.5 py-1.5 transition-colors hover:border-[var(--warm-border-hover)]"
+      aria-label={isDark ? "Switch to paper" : "Switch to black paper"}
+      className="slug text-[10px] text-ink-3 transition-colors hover:text-ink"
     >
-      <svg
-        viewBox="0 0 24 24"
-        className={`h-3.5 w-3.5 transition-colors ${!isDark ? "text-[var(--warm-bone-bright)]" : "text-[var(--warm-muted)]"}`}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={2}
-      >
-        <circle cx="12" cy="12" r="4" />
-        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-      </svg>
-      <svg
-        viewBox="0 0 24 24"
-        className={`h-3.5 w-3.5 transition-colors ${isDark ? "text-[var(--warm-bone-bright)]" : "text-[var(--warm-muted)]"}`}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={2}
-      >
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-      </svg>
+      {isDark ? "Black paper" : "Paper"}
     </button>
   )
 }
 
 export function SiteFooter() {
   return (
-    <footer className="mt-16 flex items-center justify-between border-t border-[var(--warm-border)] pt-6 pb-8 md:mt-20">
-      <ThemeToggle />
-      <div className="flex items-center gap-3">
-        <Link
-          href={X_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={iconLinkClass}
-          aria-label="Cameron on X"
-        >
-          <XLogo className="h-4 w-4" />
-        </Link>
-        <Link
-          href={GITHUB_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={iconLinkClass}
-          aria-label="GitHub profile"
-        >
-          <Github className="h-4 w-4" strokeWidth={1.5} />
-        </Link>
+    <footer className="mt-20 border-t border-rule pt-5 pb-10 md:mt-28">
+      <div className="flex items-center justify-between gap-6">
+        <ThemeToggle />
+
+        <div className="flex items-center gap-4">
+          <Link
+            href={X_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-ink-3 transition-colors hover:text-ink"
+            aria-label="Cameron on X"
+          >
+            <XLogo className="h-4 w-4" />
+          </Link>
+          <Link
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-ink-3 transition-colors hover:text-ink"
+            aria-label="GitHub profile"
+          >
+            <Github className="h-4 w-4" strokeWidth={1.5} />
+          </Link>
+        </div>
       </div>
     </footer>
   )
