@@ -43,13 +43,19 @@ function Card({ item }: { item: CuratedItem }) {
             className={
               item.category === "product"
                 ? "object-contain p-5"
-                : "object-cover grayscale-[0.15] transition-[filter] duration-500 group-hover:grayscale-0"
+                : // Album art is square and the box is 4:3 — cropping would cut
+                  // the sleeve's own typography off, so contain it instead.
+                  item.category === "music"
+                  ? "object-contain"
+                  : "object-cover grayscale-[0.15] transition-[filter] duration-500 group-hover:grayscale-0"
             }
             sizes="(max-width: 640px) 85vw, (max-width: 900px) 45vw, 33vw"
           />
         ) : null}
 
-        {item.youtubeId ? (
+        {/* Every music card gets the play affordance, not just YouTube-backed
+            ones — the Spotify-linked entries are just as playable. */}
+        {item.category === "music" ? (
           <span className="absolute inset-0 flex items-center justify-center">
             <span className="flex h-9 w-9 items-center justify-center bg-paper text-ink">
               <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 translate-x-px" fill="currentColor">

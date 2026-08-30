@@ -77,4 +77,28 @@ export const curated: CuratedItem[] = [
     image: "/curated/brizo-faucet.png",
     tag: "product",
   },
+  {
+    id: "godspeed",
+    title: "godspeed",
+    subtitle: "frank ocean · blonde",
+    category: "music",
+    url: "https://open.spotify.com/track/34xTFwjPQ1dC6uJmleno7x",
+    image: "/curated/blond.jpg",
+  },
+  {
+    id: "send-it-on",
+    title: "send it on",
+    subtitle: "d'angelo · voodoo",
+    category: "music",
+    url: "https://open.spotify.com/track/5LIwaG8Wl9LfExcmiRQm7J",
+    image: "/curated/voodoo.jpg",
+  },
+  {
+    id: "whats-going-on",
+    title: "what's going on",
+    subtitle: "marvin gaye",
+    category: "music",
+    url: "https://open.spotify.com/track/34b3a3Pz9Jlz0092LMyNAB",
+    image: "/curated/whats-going-on.jpg",
+  },
 ]
