@@ -20,14 +20,13 @@ export type Post = {
   subjects: string[]
 }
 
-/** Home page — projects list, newest first */
-export const projects: Project[] = [
+const projectList: Project[] = [
   {
     year: "2026",
     name: "welles",
     url: "https://welles.studio/",
     subjects: ["ai editor", "screen recording", "demos"],
-    status: "building",
+    status: "open source",
   },
   {
     year: "2026",
@@ -67,14 +66,12 @@ export const projects: Project[] = [
     name: "first ballot ff",
     url: "https://www.firstballotff.com/",
     blogSlug: "/blog/first-ballot-ff",
-    value: "public launch",
     subjects: ["fantasy football", "data modeling"],
-    status: "live",
+    status: "open source",
   },
 ]
 
-/** Blog index — write-ups, newest first */
-export const posts: Post[] = [
+const postList: Post[] = [
   {
     year: "2026",
     title:
@@ -106,3 +103,19 @@ export const posts: Post[] = [
     subjects: ["sports betting", "expected value", "data modeling", "market theory"],
   },
 ]
+
+/**
+ * Newest first. Sorted here rather than by hand so the list cannot drift out
+ * of order as entries are added — it previously ran 2026, 2026, 2024, 2025,
+ * 2024, which made the year column print 2024 twice with 2025 between.
+ *
+ * Sort is stable, so projects sharing a year keep their authored order.
+ */
+export const projects: Project[] = [...projectList].sort(
+  (a, b) => Number(b.year) - Number(a.year)
+)
+
+/** Newest first, same rule as above. */
+export const posts: Post[] = [...postList].sort(
+  (a, b) => Number(b.year) - Number(a.year)
+)
