@@ -4,7 +4,7 @@ import type { Metadata } from "next"
 import { BlogArticleShell } from "@/components/BlogArticleShell"
 
 export const metadata: Metadata = {
-  title: "nfl draft theory | Cameron Norfleet",
+  title: "nfl draft theory | norfleet.tech",
   description:
     "a data-driven exploration of the nfl's parity machine: combine signals, surplus value, and why trading back compounds luck.",
 }
